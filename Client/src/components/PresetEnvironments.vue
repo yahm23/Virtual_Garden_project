@@ -1,4 +1,4 @@
-<template >
+<!-- <template >
   <div >
     <p>Preset-environment file linked</p>
     <virtual-garden> </virtual-garden>
@@ -18,4 +18,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-</style>
+</style> -->

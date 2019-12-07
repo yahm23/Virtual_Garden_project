@@ -14,7 +14,7 @@ export default {
   name:'create-environment',
   components:{
     'map-environment':MapEnvironment,
-    'preset-environment':PresetEnvironment
+    // 'preset-environment':PresetEnvironment
   }
 }
 </script>
