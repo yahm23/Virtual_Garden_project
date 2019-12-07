@@ -1,14 +1,14 @@
 <template >
   <div class="">
     <map-environment> </map-environment>
-    <preset-environment> </preset-environment>
+    <!-- <preset-environment> </preset-environment> -->
   </div>
 
 </template>
 
 <script>
 import MapEnvironment from '@/components/Map.vue'
-import PresetEnvironment from '@/components/PresetEnvironments.vue'
+// import PresetEnvironment from '@/components/PresetEnvironments.vue'
 
 export default {
   name:'create-environment',

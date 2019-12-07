@@ -6,7 +6,7 @@
 
 
 <script>
-import Welcome from '@/components/Welcome.vue'
+import Welcome from '@/pages/Welcome.vue'
 
 export default {
   name: 'app',

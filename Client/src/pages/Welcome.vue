@@ -1,5 +1,6 @@
 <template>
   <div >
+    Welcome linked
     <create-environment> </create-environment>
   </div>
 </template>
@@ -7,7 +8,7 @@
 
 <script>
 
-import CreateEnvironment from '@/components/CreateEnvironment.vue'
+import CreateEnvironment from '@/pages/CreateEnvironment.vue'
 
 
 export default {

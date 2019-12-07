@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import VirtualGarden from '@/components/VirtualGarden.vue'
+import VirtualGarden from '@/pages/VirtualGarden.vue'
 
 export default {
   name:'preset-environment',
