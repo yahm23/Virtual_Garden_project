@@ -9,6 +9,7 @@ db.dropDatabase();
 //     id: 'provided by mongodb',
 //     name:"",
 //     email:"",
+//     lastConected: "date",
 //     gardens:[
 //       {
 //         id: 'provided by mongodb',
@@ -20,7 +21,7 @@ db.dropDatabase();
 //             apiData: plant_id:'number',
 //             simulationData:{
 //               birthDate: "",  
-//               waterLevel:""  
+//               waterLevel:"" , 
 //             }
 //           }
 //         ]
