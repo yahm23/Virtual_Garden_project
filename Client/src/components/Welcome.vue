@@ -1,16 +1,14 @@
 <template>
   <div >
-    <new-environment> </new-environment>
-    <preset-environment> </preset-environment>
-
+    <create-environment> </create-environment>
   </div>
 </template>
 
 
 <script>
 
-import NewEnvironment from '@/components/CreateEnvironment.vue'
-import PresetEnvironment from '@/components/PresetEnvironments.vue'
+import CreateEnvironment from '@/components/CreateEnvironment.vue'
+
 
 export default {
   name: 'welcome',
@@ -19,8 +17,7 @@ export default {
     }
   },
   components: {
-    "new-environment": NewEnvironment,
-    "preset-environment": PresetEnvironment
+    "create-environment": CreateEnvironment,
   }
 
 }
