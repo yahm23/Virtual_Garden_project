@@ -4,7 +4,6 @@ const ObjectId = require('mongodb').ObjectId;
 const createRouter = function(collection){
   
   const router = express.router();
-  
   router.get('/', (req,res) => {
     collection
     .find()
@@ -16,8 +15,6 @@ const createRouter = function(collection){
       res.json({status: 500, error: err});
     });
   });
-  
-  
 }
 
 module.exports = createRouter;
