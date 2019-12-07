@@ -1,13 +1,12 @@
-<template >
+<template lang="html">
   <div class="">
-    single plant linked 
+    Environment Detail linked
   </div>
 </template>
 
 <script>
-
 export default {
-  name:'single-plant'
+  name:'environment-detail'
 }
 </script>
 
