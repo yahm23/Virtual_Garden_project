@@ -1,22 +1,30 @@
 <template>
   <div id="app">
-    <welcome> </welcome>
+    <welcome v-if="showWelcome"> </welcome>
+    <create-environment v-if="showEnvironment"> </create-environment>
+    <virtual-garden v-if="showGarden"> </virtual-garden>
   </div>
 </template>
 
 
 <script>
 import Welcome from '@/pages/Welcome.vue'
+import CreateEnvironment from '@/pages/CreateEnvironment.vue'
+import VirtualGarden from '@/pages/VirtualGarden.vue'
 
 export default {
   name: 'app',
   data(){
     return{
-      test:'Hello World'
+      showWelcome:true,
+      showEnvironment:true,
+      showGarden:true
     }
   },
   components: {
-    "welcome": Welcome
+    "welcome": Welcome,
+    'create-environment':CreateEnvironment,
+    'virtual-garden':VirtualGarden
   }
 }
 </script>
