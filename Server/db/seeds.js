@@ -29,15 +29,15 @@ db.users.insertMany([{
     gardens: [{
         location_id: "787653",
         plants: [{
-            plant_id: 348957,
+            plant_id: 3457,
             birthDate: "date",
             waterLevel: 0.5
           },{
-            plant_id: 348957,
+            plant_id: 348942342357,
             birthDate: "date",
             waterLevel: 0.5
           }, {
-            plant_id: 348957,
+            plant_id: 3482342342342342957,
             birthDate: "date",
             waterLevel: 0.4
           }]
