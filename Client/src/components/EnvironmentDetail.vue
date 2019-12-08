@@ -15,8 +15,8 @@ export default {
   data(){
     return{
       'coords':[],
-      'lat':0,
-      'lng':0,
+      'lat':'10.006722349135584',
+      'lng':'0.00274658203125',
       'allWeather':''
     }
   },
@@ -27,16 +27,16 @@ export default {
     eventBus.$on('latAndLng', values =>{
     this.coords = values;
     this.lat = values['lat'];
-    this.lng = values['lng'];
-    this.fetchWeather()
+    this.lng = values['lng']
+    this.fetchWeather(this.lat,this.lng)
+
     })
+
   },
   methods:{
-    fetchWeather: ()=>{
+    fetchWeather: (lat,lng)=>{
       const link = `https://www.metaweather.com/api/location/search/?lattlong=${lat},${lng}`
-      console.log('test',link);
-      // fetch(`https://www.metaweather.com/api/location/search/?lattlong=${lat},${lng}`)
-      // .then(results =>  this.allWeather = results);
+      console.log('testing',link);
     }
   }
 
