@@ -14,7 +14,8 @@ MongoClient.connect('mongodb://localhost:27017')
 .then(client => {
   const db = client.db('virtualGarden');
   const userCollection = db.collection('users');  
-  app.use('/api/users', createRouter(userCollection)); 
+  //This will create the router for users
+  app.use('/', createRouter(userCollection));
 })
 .catch(console.error);
 
