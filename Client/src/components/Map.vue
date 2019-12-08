@@ -2,7 +2,7 @@
 <template >
   <div class="" lang="html">
     <p>Map connected:</p>
-    <environment-detail> </environment-detail>
+    <environment-detail > </environment-detail>
     <div class="">
       <l-map id="clicky" class='full-map' :zoom="zoom"
         :min-zoom="minZoom"
