@@ -11,17 +11,44 @@ db.users.insertMany([{
   name: "Eduardo",
   email: "eduardo@codeclan.co.uk",
   lastConected: "",
-  gardens: []
-},{
+  gardens: [{
+      location_id: "asdfadsfas",
+      plants: []
+    }, {
+      location_id: "fasdfas",
+      plants: []
+    }, {
+      location_id: "fasdfads",
+      plants: []
+    }]
+}, {
   // AN ID FORM MONGODB
   name: "Yousef",
   email: "yousef@codeclan.co.uk",
   lastConected: "",
-  gardens: []
-},{
+  gardens: [{
+    location_id: "787653",
+    plants: []
+  },{
+    location_id: "5435324",
+    plants: []
+  },{
+    location_id: "2234654",
+    plants: []
+  }]
+}, {
   // AN ID FORM MONGODB
   name: "Aresky",
   email: "aresky@codeclan.co.uk",
   lastConected: "",
-  gardens: []
+  gardens: [{
+    location_id: "43567",
+    plants: []
+  },{
+    location_id: "234092",
+    plants: []
+  },{
+    location_id: "22355",
+    plants: []
+  }]
 }]);
