@@ -26,13 +26,17 @@ export default {
   components: {
     "welcome": Welcome,
     'create-environment':CreateEnvironment,
-    'virtual-garden':VirtualGarden
+    'virtual-garden':VirtualGarden,
+    // "map-fullscreen": MapFullScreen
   },
   mounted(){
     eventBus.$on('showWelcome',state => {this.showWelcome=state;
-    this.showEnvironment=true;})
+    this.showEnvironment=true;});
+    eventBus.$on('showEnvironment',state => {this.showEnvironment=state;
+    this.showGarden = true});
+
   },
-  "map-fullscreen": MapFullScreen
+
 }
 
 </script>

@@ -15,7 +15,8 @@ export default {
   components:{
     'map-environment':MapEnvironment,
     // 'preset-environment':PresetEnvironment
-  }
+  },
+
 }
 </script>
 

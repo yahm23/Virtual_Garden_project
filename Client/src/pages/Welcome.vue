@@ -1,7 +1,7 @@
 <template>
   <div >
     Welcome linked
-    <button @click="onClick" type="button" value="Proceed">Hide Welcome</button>
+    <button @click="onClick" type="button" value="Proceed">Build Your Garden Environment!</button>
   </div>
 </template>
 

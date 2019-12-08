@@ -1,28 +1,29 @@
 
 <template >
   <div class="" lang="html">
-    <p>Map connected</p>
+    <p>Map connected:</p>
     <environment-detail> </environment-detail>
-    <virtual-garden> </virtual-garden>
-    <l-map :zoom="zoom"
-           :min-zoom="minZoom"
-           :max-zoom="maxZoom"
-           :position="zoomPosition">
+    <div class="">
+      <l-map class='full-map' :zoom="zoom"
+        :min-zoom="minZoom"
+        :max-zoom="maxZoom"
+        :position="zoomPosition">
         <l-tile-layer :url="url"></l-tile-layer>
         <l-marker :lat-lng="marker"
-                  :draggable="draggable"
-                  :icon="icon"
-                  ></l-marker>
-    </l-map>
-
+        :draggable="draggable"
+        :icon="icon"
+        ></l-marker>
+      </l-map>
+    </div>
+    <button type="button"  @click="onClick" name="button">Pick your location!</button>
   </div>
 </template>
 
 <script>
-import VirtualGarden from '@/pages/VirtualGarden.vue'
 import EnvironmentDetail from '@/components/EnvironmentDetail.vue'
 import { icon, latLngBounds } from "leaflet";
 import {LMap, LTileLayer, LMarker ,LControlZoom,} from 'vue2-leaflet';
+import {eventBus} from '@/main.js'
 
 export default {
     name: 'map-fullscreen',
@@ -31,9 +32,13 @@ export default {
     LTileLayer,
     LMarker,
     LControlZoom,
-    'virtual-garden':VirtualGarden,
     'environment-detail':EnvironmentDetail
-},
+    },
+    methods:{
+      onClick(){
+        eventBus.$emit("showEnvironment",false)
+      }
+    },
     data: function() {
       return {
         maxZoom: 10,
