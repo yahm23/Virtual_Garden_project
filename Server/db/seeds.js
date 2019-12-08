@@ -7,11 +7,11 @@ db.dropDatabase();
 
 // INSERTING USERS
 db.users.insertMany([{
-  // AN ID FORM MONGODB
-  name: "Eduardo",
-  email: "eduardo@codeclan.co.uk",
-  lastConected: "",
-  gardens: [{
+    // AN ID FORM MONGODB
+    name: "Eduardo",
+    email: "eduardo@codeclan.co.uk",
+    lastConected: "",
+    gardens: [{
       location_id: "asdfadsfas",
       plants: []
     }, {
@@ -21,34 +21,75 @@ db.users.insertMany([{
       location_id: "fasdfads",
       plants: []
     }]
-}, {
-  // AN ID FORM MONGODB
-  name: "Yousef",
-  email: "yousef@codeclan.co.uk",
-  lastConected: "",
-  gardens: [{
-    location_id: "787653",
-    plants: []
-  },{
-    location_id: "5435324",
-    plants: []
-  },{
-    location_id: "2234654",
-    plants: []
-  }]
-}, {
-  // AN ID FORM MONGODB
-  name: "Aresky",
-  email: "aresky@codeclan.co.uk",
-  lastConected: "",
-  gardens: [{
-    location_id: "43567",
-    plants: []
-  },{
-    location_id: "234092",
-    plants: []
-  },{
-    location_id: "22355",
-    plants: []
-  }]
-}]);
+  }, {
+    // AN ID FORM MONGODB
+    name: "Yousef",
+    email: "yousef@codeclan.co.uk",
+    lastConected: "",
+    gardens: [{
+        location_id: "787653",
+        plants: [{
+            plant_id: 348957,
+            birthDate: "date",
+            waterLevel: 0.5
+          },{
+            plant_id: 348957,
+            birthDate: "date",
+            waterLevel: 0.5
+          }, {
+            plant_id: 348957,
+            birthDate: "date",
+            waterLevel: 0.4
+          }]
+      },
+      {
+        location_id: "5435324",
+        plants: [{
+            plant_id: 345435,
+            birthDate: "date",
+            waterLevel: 0.654
+          },{
+            plant_id: 34355,
+            birthDate: "date",
+            waterLevel: 0.8
+          }, {
+            plant_id: 348434,
+            birthDate: "date",
+            waterLevel: 0.23
+          }]
+      },
+      {
+        location_id: "2234654",
+        plants: [{
+            plant_id: 567675,
+            birthDate: "date",
+            waterLevel: 0.4
+          },{
+            plant_id: 3484567,
+            birthDate: "date",
+            waterLevel: 0.99
+          }, {
+            plant_id: 36456457,
+            birthDate: "date",
+            waterLevel: 0.3
+          }]
+      }
+    ]
+  },
+  {
+    // AN ID FORM MONGODB
+    name: "Aresky",
+    email: "aresky@codeclan.co.uk",
+    lastConected: "",
+    gardens: [{
+      location_id: "43567",
+      plants: []
+    }, {
+      location_id: "234092",
+      plants: []
+    }, {
+      location_id: "22355",
+      plants: []
+    }]
+  }
+]);
