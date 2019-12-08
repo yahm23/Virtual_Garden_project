@@ -5,6 +5,9 @@ const ObjectId = require('mongodb').ObjectId;
 const createRouter = function(collection) {
 
   const router = express.Router();
+  
+  //*****************************
+  
   //INDEX for users
   router.get('/', (req, res) => {
     collection
@@ -101,6 +104,8 @@ const createRouter = function(collection) {
         });
       });
   });
+  
+  //*****************************
 
   //INDEX for gardens
   router.get('/:userId/gardens', (req, res) => {
@@ -119,7 +124,7 @@ const createRouter = function(collection) {
         });
       });
   });
-  
+
   //SHOW for gardens
   router.get('/:userId/gardens/:location_id', (req, res) => {
     id = req.params.userId;
@@ -139,7 +144,7 @@ const createRouter = function(collection) {
         });
       });
   });
-  
+
   //POST for gardens
   router.put('/:userId/gardens', (req, res) => {
     const id = req.params.userId;
@@ -150,7 +155,9 @@ const createRouter = function(collection) {
       .findOneAndUpdate({
         _id: ObjectId(id)
       }, {
-        $push: {gardens:updatedData}
+        $push: {
+          gardens: updatedData
+        }
       }, {
         returnOriginal: false
       })
@@ -165,16 +172,20 @@ const createRouter = function(collection) {
         });
       });
   });
-  
+
   //DELETE for gardens
   router.put('/:userId/gardens/:location_id/delete', (req, res) => {
     const id = req.params.userId;
-      
-      collection
+
+    collection
       .findOneAndUpdate({
         _id: ObjectId(id)
       }, {
-        $pull: {'gardens':{location_id : req.params.location_id}}
+        $pull: {
+          'gardens': {
+            location_id: req.params.location_id
+          }
+        }
       }, {
         returnOriginal: false
       })
@@ -190,6 +201,8 @@ const createRouter = function(collection) {
       });
   });
   
+  //*****************************
+
   //INDEX for plants
   router.get('/:userId/gardens/:location_id/plants', (req, res) => {
     id = req.params.userId;
@@ -199,8 +212,7 @@ const createRouter = function(collection) {
       })
       .then(doc => res.json(doc.gardens.filter(garden => {
         return garden.location_id === req.params.location_id
-      })[0].plants
-      ))
+      })[0].plants))
       .catch((err) => {
         console.error(err);
         res.status(500);
@@ -211,8 +223,92 @@ const createRouter = function(collection) {
       });
   });
 
+  //SHOW for plants
+  router.get('/:userId/gardens/:location_id/plants/:plant_id', (req, res) => {
+    id = req.params.userId;
+    collection
+      .findOne({
+        _id: ObjectId(id)
+      })
+      .then(doc => res.json(doc.gardens.filter(garden => {
+         return garden.location_id === req.params.location_id
+      })[0].plants.filter(plant => {
+        return plant.plant_id == req.params.plant_id
+      })))
+      .catch((err) => {
+        console.error(err);
+        res.status(500);
+        res.json({
+          status: 500,
+          error: err
+        });
+      });
+  });
+  
+  // POST for plants
+  // router.put('/:userId/gardens/:location_id/plants/add', (req, res) => {
+    
+    const id = req.params.userId;
+    const updatedData = req.body;
+    delete updatedData._id;
+    
+    collection
+    .findOne({
+      _id: ObjectId(id)
+    }).findOneAndUpdate({
+      location_id: req.params.location_id
+    }, {
+      $push: {
+        plants: updatedData
+      }
+    }, {
+      returnOriginal: false
+    })
+    .then(doc => res.json(doc.gardens.filter(garden => {
+       return garden.location_id === req.params.location_id
+    })[0].plants.filter(plant => {
+      return plant.plant_id == req.params.plant_id
+    })))
+      .then(result => {
+        res.json(result.value)
+      })
+      .catch((err) => {
+        res.status(500);
+        res.json({
+          status: 500,
+          error: err
+        });
+      });
+  });
+  
+  //DELTE for plants 
+  router.put('/:userId/gardens/:location_id/delete', (req, res) => {
+    const id = req.params.userId;
 
-
+    collection
+      .findOneAndUpdate({
+        _id: ObjectId(id)
+      }, {
+        $pull: {
+          'gardens': {
+            location_id: req.params.location_id
+          }
+        }
+      }, {
+        returnOriginal: false
+      })
+      .then(result => {
+        res.json(result.value)
+      })
+      .catch((err) => {
+        res.status(500);
+        res.json({
+          status: 500,
+          error: err
+        });
+      });
+  });
+  //*****************************
 
   return router
 };
