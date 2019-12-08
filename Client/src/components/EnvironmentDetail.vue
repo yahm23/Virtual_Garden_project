@@ -3,7 +3,7 @@
     <div v-if='coords'>
       <p>Average temperature</p>
       Your lat is {{lat}} and  long {{lng}}
-      
+
     </div>
   </div>
 </template>
@@ -30,9 +30,8 @@ export default {
     this.lat = values['lat'];
     this.lng = values['lng']
     // this.allWeather = this.fetchWeather(this.lat,this.lng)
-
     });
-    eventBus.$on('nearestCity', city =>{ this.allWeather=city})
+    eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
 
   },
   methods:{

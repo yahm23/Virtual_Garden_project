@@ -38,20 +38,18 @@ export default {
     },
     methods:{
       onClick(e){
-        // eventBus.$emit("showEnvironment",false)
-        // eventBus.$emit("latAndLng",this.LMarker)
-
-        // Lmarker.$on('update:latLng',value =>this.test=value)
-        // var latlng = map.mouseEventToLatLng(ev.originalEvent);
-        // console.log(latlng.lat + ', ' + latlng.lng)
-
         eventBus.$emit("latAndLng",e.latlng);
         const lat = e.latlng['lat'];
         const lng = e.latlng['lng'];
-        
+
         fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?lattlong=${lat},${lng}`)
         .then(results=>results.json())
-        .then(weatherNearestCity => eventBus.$emit("nearestCity",weatherNearestCity[0]))
+        .then(weatherNearestCity =>{
+          fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${weatherNearestCity[0]['woeid']}`)
+          .then(results=>results.json())
+          .then(weather =>eventBus.$emit("weatherData",weather['consolidated_weather']))
+          // .then(weather =>console.log('test',weather))
+        })
       }
     },
     data: function() {
