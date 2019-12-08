@@ -1,15 +1,12 @@
 <template>
   <div id="app">
     <welcome> </welcome>
-      <map-fullscreen/>
   </div>
 </template>
 
 
 <script>
 import Welcome from '@/pages/Welcome.vue'
-import MapFullScreen from './components/Map.vue'
->>>>>>> create/Map_Component_v2
 
 export default {
   name: 'app',
@@ -19,7 +16,7 @@ export default {
     }
   },
   components: {
-    "welcome": Welcome
+    "welcome": Welcome,
     "map-fullscreen": MapFullScreen
   }
 }
