@@ -4,15 +4,17 @@
     <p>Map connected:</p>
     <environment-detail> </environment-detail>
     <div class="">
-      <l-map @mouseup='onClick' class='full-map' :zoom="zoom"
+      <l-map id="clicky" class='full-map' :zoom="zoom"
         :min-zoom="minZoom"
         :max-zoom="maxZoom"
         :position="zoomPosition">
         <l-tile-layer :url="url"></l-tile-layer>
-        <l-marker @click='mapClick':lat-lng="marker"
+
+        <l-marker @mouseup='onClick':lat-lng="marker"
         :draggable="draggable"
         :icon="icon"
         ></l-marker>
+
       </l-map>
     </div>
     <button type="button"  @click="onClick" name="button">Pick your location!</button>
@@ -35,15 +37,20 @@ export default {
     'environment-detail':EnvironmentDetail
     },
     methods:{
-      onClick(){
+      onClick(e){
         // eventBus.$emit("showEnvironment",false)
-        eventBus.$emit("latAndLng",this.L.latLng)
-      },
-      mapClick(){
+        // eventBus.$emit("latAndLng",this.LMarker)
+
+        // Lmarker.$on('update:latLng',value =>this.test=value)
+        // var latlng = map.mouseEventToLatLng(ev.originalEvent);
+        // console.log(latlng.lat + ', ' + latlng.lng)
+
+        eventBus.$emit("latAndLng",e.latlng)
       }
     },
     data: function() {
       return {
+        test:'',
         maxZoom: 10,
         minZoom: 2,
         zoom:2,

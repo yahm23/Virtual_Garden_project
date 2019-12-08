@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="">
-    <div v-if='latLng'>
-      <p>Average temperature{{latLng}}</p>
+    <div v-if='coords'>
+      <p>Average temperature</p>
+      Your lat is {{lat}} and  long {{lng}}
     </div>
   </div>
 </template>
@@ -14,16 +15,23 @@ export default {
   name:'environment-detail',
   data(){
     return{
-      'latLng':{}
+      'coords':[],
+      'lat':'',
+      'lng':''
+
     }
   },
+  computed:{
+
+  },
   mounted(){
-    // eventBus.$on('latAndlang', values =>this.latLng=values)
-    // this.latLng=LMarker.latLng
+    eventBus.$on('latAndLng', values =>{
+    this.coords = values;
+    this.lat = values['lat'];
+    this.lng = values['lng']})
   },
   method:{
     fetchWeather: function() {
-      const latlang2 = eventBus.$on('latAndlang', values =>this.latLng=values)
       // fetch(``)
       //   .then(bookings => this.bookings = bookings);
     }
@@ -31,15 +39,6 @@ export default {
 
 }
 </script>
-
-<!-- "name": "LMarker",
- "mixins": [ { "props": { "pane": { "default": "overlayPane" }, "attribution": { "default": null }, "name": { "custom": true }, "layerType": { "custom": true }, "visible": { "custom": true, "default": true } }, "methods": {} }, { "props": { "options": {} } } ],
-
-  "props": { "pane": { "default": "markerPane" },
-
-  "draggable": { "custom": true, "default": false },
-
-  "latLng": { "type": [ null, null ], "custom": true, "default": null }, "icon": { "type": [ null ], "custom": false }, "zIndexOffset": { "custom": false, "default": null } }, "methods": {}, "_Ctor": {} -->
 
 <style lang="css" scoped>
 </style>
