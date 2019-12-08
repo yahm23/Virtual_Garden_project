@@ -3,6 +3,7 @@
     <div v-if='coords'>
       <p>Average temperature</p>
       Your lat is {{lat}} and  long {{lng}}
+      
     </div>
   </div>
 </template>
@@ -17,7 +18,7 @@ export default {
       'coords':[],
       'lat':'10.006722349135584',
       'lng':'0.00274658203125',
-      'allWeather':''
+      'allWeather':[]
     }
   },
   computed:{
@@ -28,16 +29,15 @@ export default {
     this.coords = values;
     this.lat = values['lat'];
     this.lng = values['lng']
-    this.fetchWeather(this.lat,this.lng)
+    // this.allWeather = this.fetchWeather(this.lat,this.lng)
 
-    })
+    });
+    eventBus.$on('nearestCity', city =>{ this.allWeather=city})
 
   },
   methods:{
-    fetchWeather: (lat,lng)=>{
-      const link = `https://www.metaweather.com/api/location/search/?lattlong=${lat},${lng}`
-      console.log('testing',link);
-    }
+
+
   }
 
 }
