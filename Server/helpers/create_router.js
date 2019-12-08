@@ -190,7 +190,26 @@ const createRouter = function(collection) {
       });
   });
   
-    //
+  //INDEX for plants
+  router.get('/:userId/gardens/:location_id/plants', (req, res) => {
+    id = req.params.userId;
+    collection
+      .findOne({
+        _id: ObjectId(id)
+      })
+      .then(doc => res.json(doc.gardens.filter(garden => {
+        return garden.location_id === req.params.location_id
+      })[0].plants
+      ))
+      .catch((err) => {
+        console.error(err);
+        res.status(500);
+        res.json({
+          status: 500,
+          error: err
+        });
+      });
+  });
 
 
 
