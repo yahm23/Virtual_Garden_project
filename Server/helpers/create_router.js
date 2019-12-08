@@ -1,4 +1,4 @@
-//NOT TESTED YET
+// TESTED
 const express = require('express');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -52,8 +52,9 @@ const createRouter = function(collection){
   const id = req.params.id;
   const updatedData = req.body;
   delete updatedData._id;
+  
   collection
-  .findOneAndUpdate({_id:ObjectId(id)}, {set: updatedData})
+  .findOneAndUpdate({_id:ObjectId(id)}, {$set: updatedData}, {returnOriginal:false})
   .then(result => {
     res.json(result.value)
   })
@@ -68,7 +69,7 @@ const createRouter = function(collection){
     const id = req.params.id;
     collection
     .deleteOne({_id: ObjectId(id)})
-    .then(doc => res.json(doc.deleteCount))
+    .then(doc => res.json(doc))
     .catch((err) => {
       console.error(err);
       res.status(500);
