@@ -13,6 +13,7 @@ import CreateEnvironment from '@/pages/CreateEnvironment.vue'
 import VirtualGarden from '@/pages/VirtualGarden.vue'
 
 import{eventBus} from './main.js'
+
 export default {
   name: 'app',
   data(){
@@ -31,9 +32,16 @@ export default {
     eventBus.$on('showWelcome',state => {this.showWelcome=state;
     this.showEnvironment=true;})
   },
+  "map-fullscreen": MapFullScreen
 }
+
 </script>
 
 <style>
-
+body {
+    margin: 35px;
+    border: 6px solid #222224;
+    box-sizing: border-box;
+    height: calc(100vh - 70px);
+}
 </style>
