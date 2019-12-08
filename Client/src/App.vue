@@ -16,12 +16,8 @@ export default {
     }
   },
   components: {
-<<<<<<< HEAD
     "welcome": Welcome,
     "map-fullscreen": MapFullScreen
-=======
-    "map-fullscreen": MapFullScreen
->>>>>>> create/Map_Component_v2
   }
 }
 </script>

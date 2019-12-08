@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <template >
   <div class="" lang="html">
     <p>Map connected</p>
@@ -14,9 +14,7 @@
                   :icon="icon"
                   ></l-marker>
     </l-map>
-=======
 
->>>>>>> create/Map_Component_v2
   </div>
 </template>
 
