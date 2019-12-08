@@ -1,9 +1,11 @@
+//NOT TESTED YET
 const express = require('express');
 const ObjectId = require('mongodb').ObjectId;
 
 const createRouter = function(collection){
 
   const router = express.router();
+  //INDEX
   router.get('/', (req,res) => {
     collection
     .find()
@@ -16,6 +18,7 @@ const createRouter = function(collection){
     });
   });
 
+  //SHOW
   router.get('/:id', (req, res) => {
     id = req.params.id;
     collection
@@ -27,6 +30,8 @@ const createRouter = function(collection){
       res.json({status: 500, error: err});
     });
   });
+
+  //POST
 
   router.post('/', (req, res) => {
   const newData = req.body;
@@ -42,6 +47,23 @@ const createRouter = function(collection){
   });
 });
 
+  //UPDATE
+  router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+  delete updatedData._id;
+  collection
+  .findOneAndUpdate({_id:ObjectId(id)}, {set: updatedData})
+  .then(result => {
+    res.json(result.value)
+  })
+  .catch((err) => {
+      res.status(500);
+      res.json({ status: 500, error: err });
+    });
+});
+
+  //DELETE
   router.delete('/:id', (req,res) => {
     const id = req.params.id;
     collection
