@@ -4,12 +4,12 @@
     <p>Map connected:</p>
     <environment-detail> </environment-detail>
     <div class="">
-      <l-map class='full-map' :zoom="zoom"
+      <l-map @mouseup='onClick' class='full-map' :zoom="zoom"
         :min-zoom="minZoom"
         :max-zoom="maxZoom"
         :position="zoomPosition">
         <l-tile-layer :url="url"></l-tile-layer>
-        <l-marker :lat-lng="marker"
+        <l-marker @click='mapClick':lat-lng="marker"
         :draggable="draggable"
         :icon="icon"
         ></l-marker>
@@ -36,7 +36,10 @@ export default {
     },
     methods:{
       onClick(){
-        eventBus.$emit("showEnvironment",false)
+        // eventBus.$emit("showEnvironment",false)
+        eventBus.$emit("latAndLng",this.L.latLng)
+      },
+      mapClick(){
       }
     },
     data: function() {
