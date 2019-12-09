@@ -2,7 +2,7 @@
 <template >
   <div class="" lang="html">
     <p>Map connected:</p>
-    <environment-detail> </environment-detail>
+    <environment-detail :allWeather="allWeather"> </environment-detail>
     <div class="">
       <l-map id="clicky" class='full-map' :zoom="zoom"
         :min-zoom="minZoom"
@@ -10,14 +10,14 @@
         :position="zoomPosition">
         <l-tile-layer :url="url"></l-tile-layer>
 
-        <l-marker @mouseup='onClick':lat-lng="marker"
+        <l-marker @mouseup='onDrop':lat-lng="marker"
         :draggable="draggable"
         :icon="icon"
         ></l-marker>
 
       </l-map>
     </div>
-    <button type="button"  @click="onClick2" name="button">Pick your location!</button>
+    <button type="button"  @click="onClick" name="button">Pick your location!</button>
   </div>
 </template>
 
@@ -26,6 +26,7 @@ import EnvironmentDetail from '@/components/EnvironmentDetail.vue'
 import { icon, latLngBounds } from "leaflet";
 import {LMap, LTileLayer, LMarker ,LControlZoom,} from 'vue2-leaflet';
 import {eventBus} from '@/main.js'
+import gardenServices from "../services/gardenServices"
 
 export default {
     name: 'map-fullscreen',
@@ -36,8 +37,12 @@ export default {
     LControlZoom,
     'environment-detail':EnvironmentDetail
     },
+    mounted(){
+      eventBus.$on("weatherData",weather=>{this.allWeather =weather})
+
+    },
     methods:{
-      onClick(e){
+      onDrop(e){
         eventBus.$emit("latAndLng",e.latlng);
         const lat = e.latlng['lat'];
         const lng = e.latlng['lng'];
@@ -48,16 +53,24 @@ export default {
           fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${weatherNearestCity[0]['woeid']}`)
           .then(results=>results.json())
           .then(weather =>eventBus.$emit("weatherData",weather['consolidated_weather']))
+          .then(weather =>{
+            const payload = {location_id: weather['woeid'] , plants:''}
+            gardenServices.postGarden(payload)
+          } )
           // .then(weather =>console.log('test',weather))
         })
       },
-      onClick2(){
-        eventBus.$emit("showEnvironment",false)
+      onClick(){
+        eventBus.$emit("showEnvironment",false);
+
+
+
       }
     },
     data: function() {
       return {
         test:'',
+        allWeather:'',
         maxZoom: 10,
         minZoom: 2,
         zoom:2,

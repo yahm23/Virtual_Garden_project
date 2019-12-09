@@ -18,12 +18,13 @@ import {eventBus} from '@/main.js';
 
 export default {
   name:'environment-detail',
+  props:['allWeather'],
   data(){
     return{
       'coords':[],
       'lat':'10',
       'lng':'0',
-      'allWeather':''
+      // 'allWeather':''
     }
   },
   computed:{
@@ -34,8 +35,9 @@ export default {
     this.coords = values;
     this.lat = values['lat'];
     this.lng = values['lng'];
-    eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
     });
+
+    // eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
 
   },
   methods:{

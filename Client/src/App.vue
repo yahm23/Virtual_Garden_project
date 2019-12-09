@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <welcome v-if="showWelcome"> </welcome>
+    <welcome  v-if="showWelcome"> </welcome>
     <create-environment class="show-env" v-if="showEnvironment"> </create-environment>
     <virtual-garden v-if="showGarden"> </virtual-garden>
   </div>
@@ -49,4 +49,10 @@ body {
     box-sizing: border-box;
     height: calc(100vh - 70px);
 }
+.hidden{
+  pointer-events: none;
+  display: none;
+  visibility: hidden;
+}
+
 </style>
