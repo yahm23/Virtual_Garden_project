@@ -106,6 +106,7 @@ const createRouter = function(collection) {
   });
 
   //*****************************
+  //WORKS
   //"POST" for gardens
   router.put('/:userId/gardens', (req, res) => {
     const id = req.params.userId;
@@ -175,13 +176,14 @@ const createRouter = function(collection) {
   //"UPDATE" for gardens
   router.put('/:userId/gardens/:location_id', (req, res) => {
     const id = req.params.userId;
-    const location_id= req.params.location_id;
+    const location_id = req.params.location_id;
     const updatedData = req.body;
     delete updatedData._id;
 
     collection
       .findOneAndUpdate({
-        _id: ObjectId(id), "gardens.location_id": req.params.location_id
+        _id: ObjectId(id),
+        "gardens.location_id": req.params.location_id
       }, {
         $set: {
           "gardens.$.name": updatedData.name
@@ -232,7 +234,7 @@ const createRouter = function(collection) {
 
   //*****************************
 
-  //INDEX for plants
+  //INDEX for plants WORK
   router.get('/:userId/gardens/:location_id/plants', (req, res) => {
     id = req.params.userId;
     collection
@@ -252,7 +254,7 @@ const createRouter = function(collection) {
       });
   });
 
-  //SHOW for plants
+  //SHOW for plants WORK
   router.get('/:userId/gardens/:location_id/plants/:plant_id', (req, res) => {
     id = req.params.userId;
     collection
@@ -275,28 +277,26 @@ const createRouter = function(collection) {
   });
 
   // "POST" for plants
+  //ID SHOULD BE ADDED AS A STRING
   router.put('/:userId/gardens/:location_id/plants/add', (req, res) => {
-
     const id = req.params.userId;
+    const location_id = req.params.location_id;
     const updatedData = req.body;
     delete updatedData._id;
 
     collection
       .findOneAndUpdate({
-        _id: ObjectId(id)
+        _id: ObjectId(id),
+        "gardens.location_id": req.params.location_id
       }, {
         $push: {
-          garden: updatedData
+          "gardens.$.plants": updatedData
         }
       }, {
         returnOriginal: false
       })
-      .then(doc => res.json(doc.gardens.filter(garden => {
-        return garden.location_id === req.params.location_id
-      })[0].plants.filter(plant => {
-        return plant.plant_id == req.params.plant_id
-      })))
       .then(result => {
+        console.log(result)
         res.json(result.value)
       })
       .catch((err) => {
@@ -309,24 +309,24 @@ const createRouter = function(collection) {
   });
 
   //DELTE for plants
-  router.put('/:userId/gardens/:location_id/:plant_id/delte', (req, res) => {
+  router.put('/:userId/gardens/:location_id/plants/:plant_id/delete', (req, res) => {
     const id = req.params.userId;
-    const plantId = req.params.plant_id;
 
     collection
       .findOneAndUpdate({
-        _id: ObjectId(id)
+        _id: ObjectId(id),
+        "gardens.location_id": req.params.location_id
       }, {
         $pull: {
-          'gardens': {
-            location_id: req.params.location_id
-          }
+          "gardens.$.plants": {"plant_id": req.params.plant_id}
         }
-      }, {
-        returnOriginal: false
+      },{
+        returnOriginal:false
       })
       .then(result => {
-        res.json(result.value)
+        console.log(result)
+        res.json(result.value.gardens
+        )
       })
       .catch((err) => {
         res.status(500);
