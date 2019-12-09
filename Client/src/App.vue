@@ -35,6 +35,7 @@ export default {
     eventBus.$on('showEnvironment',state => {this.showEnvironment=state;
     this.showGarden = true});
 
+
   },
 
 }

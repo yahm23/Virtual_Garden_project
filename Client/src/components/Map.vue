@@ -17,7 +17,7 @@
 
       </l-map>
     </div>
-    <button type="button"  @click="onClick" name="button">Pick your location!</button>
+    <button type="button"  @click="onClick2" name="button">Pick your location!</button>
   </div>
 </template>
 
@@ -50,6 +50,9 @@ export default {
           .then(weather =>eventBus.$emit("weatherData",weather['consolidated_weather']))
           // .then(weather =>console.log('test',weather))
         })
+      },
+      onClick2(){
+        eventBus.$emit("showEnvironment",false)
       }
     },
     data: function() {
