@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <welcome v-if="showWelcome"> </welcome>
+    <!-- <welcome v-if="showWelcome"> </welcome>
     <create-environment class="show-env" v-if="showEnvironment"> </create-environment>
-    <virtual-garden v-if="showGarden"> </virtual-garden>
+    <virtual-garden v-if="showGarden"> </virtual-garden> -->
+
+    <my-test/>
   </div>
 </template>
 
@@ -11,6 +13,7 @@
 import Welcome from '@/pages/Welcome.vue'
 import CreateEnvironment from '@/pages/CreateEnvironment.vue'
 import VirtualGarden from '@/pages/VirtualGarden.vue'
+import MyTest from '@/components/P5Testing.vue'
 
 import{eventBus} from './main.js'
 
@@ -27,6 +30,7 @@ export default {
     "welcome": Welcome,
     'create-environment':CreateEnvironment,
     'virtual-garden':VirtualGarden,
+      'my-test':MyTest,
     // "map-fullscreen": MapFullScreen
   },
   mounted(){
