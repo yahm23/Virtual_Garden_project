@@ -246,20 +246,18 @@ const createRouter = function(collection) {
   });
   
   // POST for plants
-  // router.put('/:userId/gardens/:location_id/plants/add', (req, res) => {
+  router.put('/:userId/gardens/:location_id/plants/add', (req, res) => {
     
     const id = req.params.userId;
     const updatedData = req.body;
     delete updatedData._id;
     
     collection
-    .findOne({
+    .findOneAndUpdate({
       _id: ObjectId(id)
-    }).findOneAndUpdate({
-      location_id: req.params.location_id
     }, {
       $push: {
-        plants: updatedData
+        garden: updatedData
       }
     }, {
       returnOriginal: false
@@ -282,8 +280,9 @@ const createRouter = function(collection) {
   });
   
   //DELTE for plants 
-  router.put('/:userId/gardens/:location_id/delete', (req, res) => {
+  router.put('/:userId/gardens/:location_id/:plant_id/delte', (req, res) => {
     const id = req.params.userId;
+    const plantId =req.params.plant_id;
 
     collection
       .findOneAndUpdate({
