@@ -82,12 +82,15 @@ db.users.insertMany([{
     email: "aresky@codeclan.co.uk",
     lastConected: "",
     gardens: [{
+      name: '',
       location_id: "43567",
       plants: []
     }, {
+      name: '',
       location_id: "234092",
       plants: []
     }, {
+      name:'',
       location_id: "22355",
       plants: []
     }]

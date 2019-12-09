@@ -5,9 +5,9 @@ const ObjectId = require('mongodb').ObjectId;
 const createRouter = function(collection) {
 
   const router = express.Router();
-  
+
   //*****************************
-  
+
   //INDEX for users
   router.get('/', (req, res) => {
     collection
@@ -104,19 +104,28 @@ const createRouter = function(collection) {
         });
       });
   });
-  
-  //*****************************
 
-  //INDEX for gardens
-  router.get('/:userId/gardens', (req, res) => {
-    id = req.params.userId;
+  //*****************************
+  //"POST" for gardens
+  router.put('/:userId/gardens', (req, res) => {
+    const id = req.params.userId;
+    const updatedData = req.body;
+    delete updatedData._id;
+
     collection
-      .findOne({
+      .findOneAndUpdate({
         _id: ObjectId(id)
+      }, {
+        $push: {
+          gardens: updatedData
+        }
+      }, {
+        returnOriginal: false
       })
-      .then(doc => res.json(doc.gardens))
+      .then(result => {
+        res.json(result.value)
+      })
       .catch((err) => {
-        console.error(err);
         res.status(500);
         res.json({
           status: 500,
@@ -145,23 +154,43 @@ const createRouter = function(collection) {
       });
   });
 
-  //POST for gardens
-  router.put('/:userId/gardens', (req, res) => {
+  //INDEX for gardens
+  router.get('/:userId/gardens', (req, res) => {
+    id = req.params.userId;
+    collection
+      .findOne({
+        _id: ObjectId(id)
+      })
+      .then(doc => res.json(doc.gardens))
+      .catch((err) => {
+        console.error(err);
+        res.status(500);
+        res.json({
+          status: 500,
+          error: err
+        });
+      });
+  });
+
+  //"UPDATE" for gardens
+  router.put('/:userId/gardens/:location_id', (req, res) => {
     const id = req.params.userId;
+    const location_id= req.params.location_id;
     const updatedData = req.body;
     delete updatedData._id;
 
     collection
       .findOneAndUpdate({
-        _id: ObjectId(id)
+        _id: ObjectId(id), "gardens.location_id": req.params.location_id
       }, {
-        $push: {
-          gardens: updatedData
+        $set: {
+          "gardens.$.name": updatedData.name
         }
       }, {
         returnOriginal: false
       })
       .then(result => {
+        console.log(result)
         res.json(result.value)
       })
       .catch((err) => {
@@ -172,7 +201,6 @@ const createRouter = function(collection) {
         });
       });
   });
-
   //DELETE for gardens
   router.put('/:userId/gardens/:location_id/delete', (req, res) => {
     const id = req.params.userId;
@@ -200,7 +228,8 @@ const createRouter = function(collection) {
         });
       });
   });
-  
+
+
   //*****************************
 
   //INDEX for plants
@@ -231,7 +260,7 @@ const createRouter = function(collection) {
         _id: ObjectId(id)
       })
       .then(doc => res.json(doc.gardens.filter(garden => {
-         return garden.location_id === req.params.location_id
+        return garden.location_id === req.params.location_id
       })[0].plants.filter(plant => {
         return plant.plant_id == req.params.plant_id
       })))
@@ -244,29 +273,29 @@ const createRouter = function(collection) {
         });
       });
   });
-  
-  // POST for plants
+
+  // "POST" for plants
   router.put('/:userId/gardens/:location_id/plants/add', (req, res) => {
-    
+
     const id = req.params.userId;
     const updatedData = req.body;
     delete updatedData._id;
-    
+
     collection
-    .findOneAndUpdate({
-      _id: ObjectId(id)
-    }, {
-      $push: {
-        garden: updatedData
-      }
-    }, {
-      returnOriginal: false
-    })
-    .then(doc => res.json(doc.gardens.filter(garden => {
-       return garden.location_id === req.params.location_id
-    })[0].plants.filter(plant => {
-      return plant.plant_id == req.params.plant_id
-    })))
+      .findOneAndUpdate({
+        _id: ObjectId(id)
+      }, {
+        $push: {
+          garden: updatedData
+        }
+      }, {
+        returnOriginal: false
+      })
+      .then(doc => res.json(doc.gardens.filter(garden => {
+        return garden.location_id === req.params.location_id
+      })[0].plants.filter(plant => {
+        return plant.plant_id == req.params.plant_id
+      })))
       .then(result => {
         res.json(result.value)
       })
@@ -278,11 +307,11 @@ const createRouter = function(collection) {
         });
       });
   });
-  
-  //DELTE for plants 
+
+  //DELTE for plants
   router.put('/:userId/gardens/:location_id/:plant_id/delte', (req, res) => {
     const id = req.params.userId;
-    const plantId =req.params.plant_id;
+    const plantId = req.params.plant_id;
 
     collection
       .findOneAndUpdate({
