@@ -233,7 +233,6 @@ const createRouter = function(collection) {
 
 
   //*****************************
-
   //INDEX for plants WORK
   router.get('/:userId/gardens/:location_id/plants', (req, res) => {
     id = req.params.userId;
@@ -318,15 +317,51 @@ const createRouter = function(collection) {
         "gardens.location_id": req.params.location_id
       }, {
         $pull: {
-          "gardens.$.plants": {"plant_id": req.params.plant_id}
+          "gardens.$.plants": {
+            "plant_id": req.params.plant_id
+          }
         }
-      },{
-        returnOriginal:false
+      }, {
+        returnOriginal: false
       })
       .then(result => {
         console.log(result)
-        res.json(result.value.gardens
-        )
+        res.json(result.value.gardens)
+      })
+      .catch((err) => {
+        res.status(500);
+        res.json({
+          status: 500,
+          error: err
+        });
+      });
+  });
+
+  //"UPDATE" for gardens
+  router.put('/:userId/gardens/:location_id/plants/:plant_id/edit', (req, res) => {
+    const id = req.params.userId;
+    const location_id = req.params.location_id;
+    const updatedData = req.body;
+    delete updatedData._id;
+
+    collection
+      .findOneAndUpdate({
+        _id: ObjectId(id),
+        "gardens.location_id": req.params.location_id
+      }, {
+        $set: {
+          "gardens.$[element]": updatedData
+        }
+      }, {
+        arrayFilters: [{
+          "element.plant_id": req.params.plant_id
+        }]
+      }, {
+        returnOriginal: false
+      })
+      .then(result => {
+        console.log(result)
+        res.json(result.value.gardens)
       })
       .catch((err) => {
         res.status(500);
