@@ -1,7 +1,12 @@
 <template lang="html">
   <div class="">
     <div v-if='coords'>
-      <p>Average temperature</p>
+      <div v-if='allWeather'>
+        <p >Temperature: {{allWeather[0]['the_temp'].toPrecision(2)}}°C</p>
+        <p >Weather State: {{allWeather[0]['weather_state_name']}}</p>
+        <p >Humidity: {{allWeather[0]['humidity']}}%</p>
+      </div>
+
       Your lat is {{lat}} and  long {{lng}}
 
     </div>
@@ -16,9 +21,9 @@ export default {
   data(){
     return{
       'coords':[],
-      'lat':'10.006722349135584',
-      'lng':'0.00274658203125',
-      'allWeather':[]
+      'lat':'10',
+      'lng':'0',
+      'allWeather':''
     }
   },
   computed:{
@@ -28,10 +33,9 @@ export default {
     eventBus.$on('latAndLng', values =>{
     this.coords = values;
     this.lat = values['lat'];
-    this.lng = values['lng']
-    // this.allWeather = this.fetchWeather(this.lat,this.lng)
-    });
+    this.lng = values['lng'];
     eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
+    });
 
   },
   methods:{

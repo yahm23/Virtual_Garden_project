@@ -1,15 +1,15 @@
 <template lang="html">
   <div class="">
     <p>Virtual Garden connected</p>
+    <environment-detail> </environment-detail>
       <p>Recomended Plants:</p>
-
+      
       <div class="">
         <plant-search></plant-search>
         <plant-list></plant-list>
       </div>
 
     <canvascomp></canvascomp>
-    <environment-detail> </environment-detail>
   </div>
 </template>
 
@@ -30,12 +30,12 @@ export default {
   },
   data(){
     return{
-      weather:''
+      allWeather:''
 
     }
   },
   mounted(){
-    eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
+    // eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
   }
 }
 </script>
