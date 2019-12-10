@@ -1,7 +1,7 @@
 <template >
   <div v-if='plant' class='border'>
-    <p>Common Name: {{plant['common_name']}}</p>
-    <p>Scientific Name: {{plant['scientific_name']}}</p>
+    <p>Common Name: {{toTitleCase(plant['common_name'])}}</p>
+    <p>Scientific Name: {{toTitleCase(plant['scientific_name'])}}</p>
     <button @click.prevent='moreInfo' >Click here for More Information</button>
     <p>{{plantInformation}}</p>
   </div>
@@ -28,7 +28,12 @@ export default {
 
       this.show=true
 
-    }
+    },
+    toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
 
   }
 
