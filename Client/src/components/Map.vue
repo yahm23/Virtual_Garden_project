@@ -1,7 +1,7 @@
 
 <template >
   <div class="" lang="html">
-    <p>Map connected:</p>
+  
     <environment-detail :allWeather="allWeather"> </environment-detail>
     <div class="">
       <l-map id="clicky" class='full-map' :zoom="zoom"
@@ -113,6 +113,6 @@ export default {
 
 .full-map {
     height: calc(100vh - 80px);
-    filter: grayscale(0.8) brightness(0.7) contrast(3) invert(0.89) hue-rotate(20deg);
+    /* filter: grayscale(0.8) brightness(0.7) contrast(3) invert(0.89) hue-rotate(20deg); */
 }
 </style>
