@@ -7,7 +7,7 @@
         <p >Humidity: {{allWeather[0]['humidity']}}%</p>
       </div>
 
-      Your lat is {{lat.toPrecision(4)}} and  long {{lng.toPrecision(4)}}
+      Your lat is {{lat}} and  long {{lng}}
 
     </div>
   </div>
