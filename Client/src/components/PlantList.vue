@@ -1,7 +1,7 @@
 <template >
   <div >
-    Plant list linked
-    <single-plant></single-plant>
+    <single-plant v-for='(plant,index) in plantList' :key='index' :plant='plant'></single-plant>
+
   </div>
 </template>
 
@@ -11,7 +11,8 @@ export default {
   name:'plant-list',
   components:{
     'single-plant':SinglePlant
-  }
+  },
+  props:['plantList']
 }
 </script>
 

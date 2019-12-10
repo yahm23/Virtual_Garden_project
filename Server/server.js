@@ -29,6 +29,15 @@ app.get('/woeid/:woeid', (req, res) => {
   .then(data => res.json(data))
 })
 
+app.get('/specificplant/:id', (req, res) => {
+  const id = req.params.id
+  const url = `https://trefle.io/api/plants/${id}/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09`
+  console.log(url);
+  fetch(url)
+  .then(jsonData => jsonData.json())
+  .then(data => res.json(data))
+})
+
 app.get('/plants/:temp/:humidity', (req, res) => {
   const temp = req.params.temp
   const humidity = req.params.humidity

@@ -2,9 +2,10 @@
   <div class="">
     <p>Virtual Garden connected</p>
     <environment-detail :allWeather='allWeather'> </environment-detail>
-      <p>Recomended Plants: {{recomendedPlants}}</p>
+      <p>Recomended Plants: </p>
+
+      <plant-list :plantList='allReccomendedData'></plant-list>
       <p></p>
-      <plant-list></plant-list>
 
       <div class="">
         <plant-search></plant-search>
@@ -12,6 +13,7 @@
       </div>
 
     <canvascomp></canvascomp>
+    
   </div>
 </template>
 
@@ -61,7 +63,7 @@ export default {
           .then(results=>results.json())
 
           .then(plants => {
-            this.recomendedPlants = plants.map(plant=> plant['common_name']).filter(plant=> plant!=null);
+            // this.recomendedPlants = plants.map(plant=> plant['common_name']).filter(plant=> plant!=null);
             this.allReccomendedData = plants.filter(plant=> plant.common_name!=null)
         })
       })
