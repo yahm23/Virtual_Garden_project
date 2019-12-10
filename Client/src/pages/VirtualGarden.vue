@@ -14,9 +14,27 @@
 
       <!-- pop up -->
 
-        <button @click= 'myPopFunction'>
-          Click here to add your own plant!
-        </button>
+
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <div class="w3-container">
+
+          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Search For Plant</button>
+
+          <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+              <div class="w3-container">
+                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <p>Some text. Some text. Some text.</p>
+                <p>Some text. Some text. Some text.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <button @click= 'myPopFunction'>
+          Search your own plant!
+        </button> -->
 
 
     <canvascomp></canvascomp>
