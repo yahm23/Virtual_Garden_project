@@ -17,6 +17,7 @@
         <input v-model='search' value="Plant Name">
         <plant-list :plantList='plantsFound'></plant-list>
         <button @click='searchPlants'type="button" name="button">Search</button>
+        <button @click='modalActivate'type="button" name="button">Close</button>
       </div>
     </div>
 
