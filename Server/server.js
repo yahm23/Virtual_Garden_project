@@ -13,7 +13,7 @@ const createRouter = require('./helpers/create_router.js');
 MongoClient.connect('mongodb://localhost:27017')
 .then(client => {
   const db = client.db('virtualGarden');
-  const userCollection = db.collection('users');  
+  const userCollection = db.collection('users');
   //This will create the router for users
   app.use('/', createRouter(userCollection));
 })

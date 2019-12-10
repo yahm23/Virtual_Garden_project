@@ -13,12 +13,15 @@ db.users.insertMany([{
     lastConected: "",
     gardens: [{
       location_id: "asdfadsfas",
+      name:"",
       plants: []
     }, {
       location_id: "fasdfas",
+      name:"",
       plants: []
     }, {
       location_id: "fasdfads",
+      name:"",
       plants: []
     }]
   }, {
@@ -28,6 +31,7 @@ db.users.insertMany([{
     lastConected: "",
     gardens: [{
         location_id: "787653",
+        name:"",
         plants: [{
             plant_id: 3457,
             birthDate: "date",
@@ -44,6 +48,7 @@ db.users.insertMany([{
       },
       {
         location_id: "5435324",
+        name:"",
         plants: [{
             plant_id: 345435,
             birthDate: "date",
@@ -60,6 +65,7 @@ db.users.insertMany([{
       },
       {
         location_id: "2234654",
+        name:"",
         plants: [{
             plant_id: 567675,
             birthDate: "date",
@@ -84,6 +90,7 @@ db.users.insertMany([{
     gardens: [{
       name: '',
       location_id: "43567",
+      name:"",
       plants: []
     }, {
       name: '',
