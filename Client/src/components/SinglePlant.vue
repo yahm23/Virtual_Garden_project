@@ -24,6 +24,8 @@ export default {
     }
   },
   mounted(){
+    GardenServices.getPlants()
+    .then(res => console.log(res))
   },
   methods:{
     moreInfo(){
@@ -40,7 +42,11 @@ export default {
         "birthDate": Date()
       }
       GardenServices.addPlant(newPlant)
-      eventBus.$emit('plant-added',this.plant)
+      .then( () => GardenServices.getPlants()
+      .then(res => eventBus.$emit("getPlants", res)))
+      // eventBus.$emit('plant-added',this.plant);
+      GardenServices.getPlants()
+      .then(res => eventBus.$emit("getPlants", res))
     }
 
   }
