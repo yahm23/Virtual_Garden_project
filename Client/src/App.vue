@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <header></header>
     <welcome  v-if="showWelcome"> </welcome>
     <create-environment class="show-env" v-if="showEnvironment" :class="{hidden:!showEnvironment}"> </create-environment>
     <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID'> </virtual-garden>
@@ -50,12 +51,7 @@ export default {
 </script>
 
 <style>
-body {
-    margin: 35px;
-    border: 6px solid #222224;
-    box-sizing: border-box;
-    height: calc(100vh - 70px);
-}
+
 .hidden{
   pointer-events: none;
   display: none;

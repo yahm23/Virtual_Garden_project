@@ -1,7 +1,7 @@
 <template>
-  <div >
-    Welcome linked
-    <button @click="onClick" type="button" value="Proceed">Build Your Garden Environment!</button>
+  <div class="welcome-intro">
+    <h1><span>Welcome to </span>Virtual Garden</h1>
+    <button @click="onClick" type="button" value="Proceed" class="btn welcomeBtn">Build Your Garden Environment!</button>
   </div>
 </template>
 
