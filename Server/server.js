@@ -32,10 +32,19 @@ app.get('/woeid/:woeid', (req, res) => {
 app.get('/specificplant/:id', (req, res) => {
   const id = req.params.id
   const url = `https://trefle.io/api/plants/${id}/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09`
-  console.log(url);
   fetch(url)
   .then(jsonData => jsonData.json())
   .then(data => res.json(data))
+})
+
+app.get('/plantCommonName/:name', (req, res) => {
+  const name = req.params.name
+  const url = `https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&q=${name}&complete_data`
+  fetch(url)
+  .then(jsonData => jsonData.json())
+  .then(data => {res.json(data)
+    console.log(data)
+  })
 })
 
 app.get('/plants/:temp/:humidity', (req, res) => {

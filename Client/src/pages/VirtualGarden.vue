@@ -7,10 +7,6 @@
       <plant-list :plantList='allReccomendedData'></plant-list>
       <p></p>
 
-      <div class="">
-        <plant-search></plant-search>
-        <plant-list></plant-list>
-      </div>
 
       <!-- pop up -->
 
@@ -18,15 +14,22 @@
 
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <div class="w3-container">
+          <input v-model='search' type="text" name="" value="Enter name Here">
+          <button onclick="document.getElementById('id01').style.display='block';myPopFunction()" class="">
 
-          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Search For Plant</button>
+
+            Search For Plant
+
+          </button>
 
           <div id="id01" class="w3-modal">
             <div class="w3-modal-content">
               <div class="w3-container">
-                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <p>Some text. Some text. Some text.</p>
-                <p>Some text. Some text. Some text.</p>
+                <span onclick="document.getElementById('id01').style.display='none'" class="">
+
+                </span>
+
+                <plant-list :plantList='searchResults'></plant-list>
               </div>
             </div>
           </div>
@@ -70,28 +73,27 @@ export default {
       minTempF:'',
       humidityAsCm:'',
       allReccomendedData:[],
-      search:''
-
-
+      search:'',
+      searchResults:''
 
     }
   },
   methods:{
+
     myPopFunction() {
-      this.$prompt("Search for a Plant",'Enter Common Name')
-      .then(text => {
-
-        console.log(text);
-        // this.search = text
-        eventBus.$emit('searchValue', text)
-
+        console.log('pop wfiring');
+        fetch(`http://localhost:3000/plantCommonName/${this.search}`)
+          .then(results=>results.json())
+          .then(plants => {
+          this.searchResults = plants
+          console.log(plants)
         })
-    }
+
+        }
+
 
   },
   mounted(){
-
-    eventBus.$on('searchValue', text => this.search= text)
 
 
     fetch(`http://localhost:3000/woeid/${this.gardenWOEID}`)
