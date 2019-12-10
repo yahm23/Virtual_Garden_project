@@ -1,6 +1,6 @@
 
 <template>
-    <div class="canvas-wrap"></div>
+    <div id="p5CanvasBg"></div>
 </template>
 
 <script>
@@ -24,27 +24,29 @@ mounted() {
 
   //  Set up is here
    p5.setup = _ => {
-   p5.createCanvas(window.innerWidth - 82, window.innerHeight - 82);
+   // p5.createCanvas(window.innerWidth - 82, window.innerHeight - 82);
+   var canvas = p5.createCanvas(window.innerWidth - 82, window.innerHeight - 135);
+   canvas.parent("p5CanvasBg");
 
   }
   //  Draw is here
    p5.draw = _ => {
-   p5.background( 255,30,155, 0);
-   const degree = p5.frameCount * 16;
-   const y = p5.sin(p5.radians(degree)) * 15;
+     p5.background( 255,255,255);
+   // const degree = p5.frameCount * 16;
+   // const y = p5.sin(p5.radians(degree)) * 15;
     // const y = 500;
 
-   p5.push();
-    p5.translate(10, p5.height / 10);
-    p5.strokeWeight(1);
-    p5.noFill( );
-    p5.circle(posX, y, 50, 50);
-   p5.pop();
-   posX += speed;
-
-   if (posX > p5.width || posX < 0) {
-    speed *= -1;
-   }
+   // p5.push();
+   //  p5.translate(10, p5.height / 10);
+   //  p5.strokeWeight(1);
+   //  p5.noFill( );
+   //  p5.circle(posX, y, 50, 50);
+   // p5.pop();
+   // posX += speed;
+   //
+   // if (posX > p5.width || posX < 0) {
+   //  speed *= -1;
+   // }
   }
  }
 
@@ -52,6 +54,12 @@ mounted() {
  // : Use p5 as an instance mode
  const P5 = require('p5');
  new P5(script)
+
+
+
+
+
+
 }
 
 }
@@ -59,9 +67,9 @@ mounted() {
 
 
 <style media="screen">
-/* .screen-sizing {
-  height: 100vh;
-  width: 100%;
-
-} */
+#p5CanvasBg {
+    position: absolute;
+    height: var(--height-app);
+    z-index: -1;
+}
 </style>
