@@ -12,8 +12,15 @@
         <plant-list></plant-list>
       </div>
 
+      <!-- pop up -->
+
+        <button @click= 'myPopFunction'>
+          Click here to add your own plant!
+        </button>
+
+
     <canvascomp></canvascomp>
-    
+
   </div>
 </template>
 
@@ -23,6 +30,11 @@ import PlantSearch from'@/components/PlantList.vue'
 import CanvasComponent from'@/components/Canvas.vue'
 import EnvironmentDetail from '@/components/EnvironmentDetail.vue'
 import {eventBus} from '@/main.js'
+
+
+
+
+
 
 export default {
   name:'virtual-garden',
@@ -39,17 +51,29 @@ export default {
       allWeather:'',
       minTempF:'',
       humidityAsCm:'',
-      allReccomendedData:[]
+      allReccomendedData:[],
+      search:''
 
 
 
     }
   },
   methods:{
+    myPopFunction() {
+      this.$prompt("Search for a Plant",'Enter Common Name')
+      .then(text => {
+
+        console.log(text);
+        // this.search = text
+        eventBus.$emit('searchValue', text)
+
+        })
+    }
 
   },
   mounted(){
 
+    eventBus.$on('searchValue', text => this.search= text)
 
 
     fetch(`http://localhost:3000/woeid/${this.gardenWOEID}`)
@@ -65,6 +89,8 @@ export default {
           .then(plants => {
             // this.recomendedPlants = plants.map(plant=> plant['common_name']).filter(plant=> plant!=null);
             this.allReccomendedData = plants.filter(plant=> plant.common_name!=null)
+
+
         })
       })
 
@@ -85,4 +111,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 </style>

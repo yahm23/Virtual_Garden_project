@@ -4,6 +4,7 @@
     <p>Scientific Name: {{toTitleCase(plant['scientific_name'])}}</p>
     <button @click.prevent='moreInfo' >Click here for More Information</button>
     <p>{{plantInformation}}</p>
+    <button type="button" name="button">Add to garden </button>
   </div>
 </template>
 
