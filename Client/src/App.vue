@@ -23,7 +23,8 @@ export default {
       showEnvironment:false,
       showGarden: null,
       userID:'',
-      gardenWOEID:''
+      gardenWOEID:'',
+      plants:[]
 
 
     }
@@ -42,6 +43,7 @@ export default {
     this.showGarden = true});
 
     eventBus.$on("gardenWOEID",id => this.gardenWOEID = id );
+    eventBus.$on("plant-added", plant => this.plants.push(plant))
 
 
   },
