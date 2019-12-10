@@ -1,7 +1,7 @@
 
 <template >
   <div class="" lang="html">
-  
+
     <environment-detail :allWeather="allWeather"> </environment-detail>
     <div class="">
       <l-map id="clicky" class='full-map' :zoom="zoom"
@@ -17,6 +17,7 @@
 
       </l-map>
     </div>
+    
     <button type="button"  @click="onClick" name="button">Pick your location!</button>
   </div>
 </template>
