@@ -4,6 +4,8 @@
     <environment-detail :allWeather='allWeather'> </environment-detail>
       <p>Recomended Plants: {{recomendedPlants}}</p>
       <p></p>
+      <plant-list></plant-list>
+
       <div class="">
         <plant-search></plant-search>
         <plant-list></plant-list>
@@ -34,7 +36,8 @@ export default {
       recomendedPlants:'',
       allWeather:'',
       minTempF:'',
-      humidityAsCm:''
+      humidityAsCm:'',
+      allReccomendedData:[]
 
 
 
@@ -54,10 +57,13 @@ export default {
         this.minTempF =((this.allWeather[0]['the_temp']* 1.8) +32);
         this.humidityAsCm=(this.allWeather[0]['humidity']*0.03);
 
-        fetch(`https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&is_main_species=!null&temperature_minimum_deg_f=${this.minTempF}&precipitation_minimum%3E${this.humidityAsCm}`)
+        fetch(`http://localhost:3000/plants/${this.minTempF}/${this.humidityAsCm}`)
           .then(results=>results.json())
-          .then(results=>results.json())
-          .then(plants => {this.recomendedPlants = plants})
+
+          .then(plants => {
+            this.recomendedPlants = plants.map(plant=> plant['common_name']).filter(plant=> plant!=null);
+            this.allReccomendedData = plants.filter(plant=> plant.common_name!=null)
+        })
       })
 
 

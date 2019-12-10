@@ -29,15 +29,29 @@ app.get('/woeid/:woeid', (req, res) => {
   .then(data => res.json(data))
 })
 
+app.get('/plants/:temp/:humidity', (req, res) => {
+  const temp = req.params.temp
+  const humidity = req.params.humidity
+
+  const url = `https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&is_main_species=!null&temperature_minimum_deg_f%3E${temp}&precipitation_minimum%3E${humidity}`
+
+  console.log(url);
+  fetch(url)
+  .then(jsonData => jsonData.json())
+  .then(data => {res.json(data)
+
+  console.log(data)})
+})
+
 const MongoClient = require('mongodb').MongoClient;
 const createRouter = require('./helpers/create_router.js');
 
 MongoClient.connect('mongodb://localhost:27017')
 .then(client => {
   const db = client.db('virtualGarden');
-  const userCollection = db.collection('users');
+  const gardenCollection = db.collection('plants');
   //This will create the router for users
-  app.use('/', createRouter(userCollection));
+  app.use('/garden', createRouter(gardenCollection));
 })
 .catch(console.error);
 
