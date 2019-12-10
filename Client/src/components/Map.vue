@@ -94,7 +94,7 @@ export default {
         zoom:2,
         zoomPosition: "bottomleft",
         url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-        marker: L.latLng(10, 0),
+        marker: L.latLng(0, 0),
         draggable: true,
         visible: true,
         icon: L.icon({
@@ -112,8 +112,8 @@ export default {
 
 <style lang="css" scoped>
 
-.full-map {
-    height: calc(100vh - 188px);
+.full-map{
+    height: calc(100vh - 172px);
     position: absolute;
     top: 90px;
     z-index: 0;

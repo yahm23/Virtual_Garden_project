@@ -1,7 +1,7 @@
 <template>
   <div class="welcome-intro">
     <h1><span>Welcome to </span>Virtual Garden</h1>
-    <button @click="onClick" type="button" value="Proceed" class="btn welcomeBtn">Build Your Garden Environment!</button>
+    <button @click="onClick" type="button" value="Proceed" class="btn welcomeBtn">Build Your Garden!</button>
     <p5-example/>
   </div>
 </template>

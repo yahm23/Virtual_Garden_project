@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    <header></header>
+    <header>
+      <nav>
+        <div class="logoIcon">
+          <p>Virtual Garden</p>
+        </div>
+        <ul>
+          <li>Hello</li>
+          <li>About</li>
+          <li>Login</li>
+        </ul>
+      </nav>
+    </header>
     <welcome  v-if="showWelcome"> </welcome>
     <create-environment class="show-env" v-if="showEnvironment" :class="{hidden:!showEnvironment}"> </create-environment>
     <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID'> </virtual-garden>

@@ -7,7 +7,9 @@
         <p >Humidity: {{allWeather[0]['humidity']}}%</p>
       </div>
 
-      Your lat is {{lat}} and  long {{lng}}
+      <div class="lat-log-box">
+        Lat: {{parseFloat(lat).toPrecision(4)}} | long: {{parseFloat(lng).toPrecision(4)}}
+      </div>
 
     </div>
   </div>
@@ -22,7 +24,7 @@ export default {
   data(){
     return{
       'coords':[],
-      'lat':'10',
+      'lat':'0',
       'lng':'0',
       //'Weather':''
     }
