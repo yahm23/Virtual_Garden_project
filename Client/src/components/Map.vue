@@ -17,8 +17,8 @@
 
       </l-map>
     </div>
-    
-    <button type="button"  @click="onClick" name="button">Pick your location!</button>
+
+    <button class="btn mapBtn" type="button"  @click="onClick" name="button">Pick your location!</button>
   </div>
 </template>
 
@@ -113,7 +113,9 @@ export default {
 <style lang="css" scoped>
 
 .full-map {
-    height: calc(100vh - 80px);
-    /* filter: grayscale(0.8) brightness(0.7) contrast(3) invert(0.89) hue-rotate(20deg); */
+    height: calc(100vh - 188px);
+    position: absolute;
+    top: 90px;
+    z-index: 0;
 }
 </style>
