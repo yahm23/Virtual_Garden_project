@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="">
+  <div class="fixed-menu">
     <div v-if='coords'>
-      <div v-if='allWeather'>
+      <div v-if='allWeather' class="fixed-menu-data">
         <p >Temperature: {{allWeather[0]['the_temp'].toPrecision(2)}}°C</p>
         <p >Weather State: {{allWeather[0]['weather_state_name']}}</p>
         <p >Humidity: {{allWeather[0]['humidity']}}%</p>
