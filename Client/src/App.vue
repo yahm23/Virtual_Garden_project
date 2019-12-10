@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <welcome  v-if="showWelcome"> </welcome>
-    <create-environment class="show-env" v-if="showEnvironment"> </create-environment>
-    <virtual-garden v-if="showGarden"> </virtual-garden>
+    <create-environment class="show-env" v-if="showEnvironment" :class="{hidden:!showEnvironment}"> </create-environment>
+    <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID'> </virtual-garden>
   </div>
 </template>
 
@@ -20,13 +20,18 @@ export default {
     return{
       showWelcome:true,
       showEnvironment:false,
-      showGarden: null
+      showGarden: null,
+      userID:'',
+      gardenWOEID:''
+
+
     }
   },
   components: {
     "welcome": Welcome,
     'create-environment':CreateEnvironment,
     'virtual-garden':VirtualGarden,
+
     // "map-fullscreen": MapFullScreen
   },
   mounted(){
@@ -34,6 +39,8 @@ export default {
     this.showEnvironment=true;});
     eventBus.$on('showEnvironment',state => {this.showEnvironment=state;
     this.showGarden = true});
+
+    eventBus.$on("gardenWOEID",id => this.gardenWOEID = id );
 
 
   },

@@ -24,7 +24,7 @@ export default {
       'coords':[],
       'lat':'10',
       'lng':'0',
-      // 'allWeather':''
+      //'Weather':''
     }
   },
   computed:{
@@ -35,9 +35,9 @@ export default {
     this.coords = values;
     this.lat = values['lat'];
     this.lng = values['lng'];
+    // eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
     });
 
-    // eventBus.$on('weatherData', weather =>{ this.allWeather=weather})
 
   },
   methods:{

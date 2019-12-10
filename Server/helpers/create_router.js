@@ -5,9 +5,11 @@ const ObjectId = require('mongodb').ObjectId;
 const createRouter = function(collection) {
 
   const router = express.Router();
-  
+
   //*****************************
-  
+
+
+
   //INDEX for users
   router.get('/', (req, res) => {
     collection
@@ -104,7 +106,7 @@ const createRouter = function(collection) {
         });
       });
   });
-  
+
   //*****************************
 
   //INDEX for gardens
@@ -200,7 +202,7 @@ const createRouter = function(collection) {
         });
       });
   });
-  
+
   //*****************************
 
   //INDEX for plants
@@ -244,14 +246,14 @@ const createRouter = function(collection) {
         });
       });
   });
-  
+
   // POST for plants
   router.put('/:userId/gardens/:location_id/plants/add', (req, res) => {
-    
+
     const id = req.params.userId;
     const updatedData = req.body;
     delete updatedData._id;
-    
+
     collection
     .findOneAndUpdate({
       _id: ObjectId(id)
@@ -278,8 +280,8 @@ const createRouter = function(collection) {
         });
       });
   });
-  
-  //DELTE for plants 
+
+  //DELTE for plants
   router.put('/:userId/gardens/:location_id/:plant_id/delte', (req, res) => {
     const id = req.params.userId;
     const plantId =req.params.plant_id;
@@ -308,6 +310,8 @@ const createRouter = function(collection) {
       });
   });
   //*****************************
+
+
 
   return router
 };

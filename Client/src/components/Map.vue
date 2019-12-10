@@ -38,39 +38,56 @@ export default {
     'environment-detail':EnvironmentDetail
     },
     mounted(){
-      eventBus.$on("weatherData",weather=>{this.allWeather =weather})
+      eventBus.$on("weatherData",weather=>{
+        this.allWeather =weather['consolidated_weather']
+        this.woeid = weather['woeid']
+      })
+    },
+    computed:{
 
     },
     methods:{
+
       onDrop(e){
-        eventBus.$emit("latAndLng",e.latlng);
+        eventBus.$emit('latAndLng',e.latlng)
+
+
         const lat = e.latlng['lat'];
         const lng = e.latlng['lng'];
 
-        fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?lattlong=${lat},${lng}`)
-        .then(results=>results.json())
-        .then(weatherNearestCity =>{
-          fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${weatherNearestCity[0]['woeid']}`)
-          .then(results=>results.json())
-          .then(weather =>eventBus.$emit("weatherData",weather['consolidated_weather']))
-          .then(weather =>{
-            const payload = {location_id: weather['woeid'] , plants:''}
-            gardenServices.postGarden(payload)
-          } )
-          // .then(weather =>console.log('test',weather))
-        })
+        fetch(`http://localhost:3000/weather/${lat}/${lng}`)
+            .then(results=>results.json())
+            // .then(data=>console.log('this here',data))
+            .then(weatherNearestCity =>
+              { fetch(`http://localhost:3000/woeid/${weatherNearestCity[0]['woeid']}`)
+                .then(results=>results.json())
+                .then(weather =>{
+                  eventBus.$emit("weatherData",weather)
+                  this.weatherToSend = weather;
+                  this.woeid = weather['woeid']
+                })
+            })
+
       },
+
       onClick(){
         eventBus.$emit("showEnvironment",false);
 
+        eventBus.$emit("weatherDataSend",this.weatherToSend);
 
+        eventBus.$emit("gardenWOEID",this.woeid);
+
+        // const payload = {location_id: this.woeid};          gardenServices.postGarden(payload);
 
       }
+
     },
     data: function() {
       return {
         test:'',
         allWeather:'',
+        weatherToSend:'',
+        woeid:'yup',
         maxZoom: 10,
         minZoom: 2,
         zoom:2,

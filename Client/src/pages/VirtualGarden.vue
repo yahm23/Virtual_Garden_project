@@ -2,7 +2,7 @@
   <div class="">
     <p>Virtual Garden connected</p>
     <environment-detail :allWeather='allWeather'> </environment-detail>
-      <p>Recomended Plants:</p>
+      <p>Recomended Plants: {{recomendedPlants}}</p>
       <p></p>
       <div class="">
         <plant-search></plant-search>
@@ -28,10 +28,15 @@ export default {
     'canvascomp':CanvasComponent,
     'environment-detail':EnvironmentDetail
   },
+  props:['gardenWOEID'],
   data(){
     return{
       recomendedPlants:'',
-      allWeather:''
+      allWeather:'',
+      minTempF:'',
+      humidityAsCm:''
+
+
 
     }
   },
@@ -39,14 +44,34 @@ export default {
 
   },
   mounted(){
-    eventBus.$on("weatherData",weather=>{this.allWeather =weather})
-    // eventBus.$on('weatherData', weather =>{
-    //   const minTempF =((weather[0]['min_temp']* 1.8) +32);
-    //   const humidityAsCm=(weather[0]['humidity']*1.4);
-    //   fetch(`https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&is_main_species=!null&temperature_minimum_deg_f=${minTempF}&precipitation_minimum%3E${humidityAsCm}`)
-    //   .then(results=>results.json())
-    //   .then(plants => {this.recomendedPlants = plants})
-    //   })
+
+
+
+    fetch(`http://localhost:3000/woeid/${this.gardenWOEID}`)
+      .then(results=>results.json())
+      .then(weather =>{
+        this.allWeather= weather['consolidated_weather'];
+        this.minTempF =((this.allWeather[0]['the_temp']* 1.8) +32);
+        this.humidityAsCm=(this.allWeather[0]['humidity']*0.03);
+
+        fetch(`https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&is_main_species=!null&temperature_minimum_deg_f=${this.minTempF}&precipitation_minimum%3E${this.humidityAsCm}`)
+          .then(results=>results.json())
+          .then(results=>results.json())
+          .then(plants => {this.recomendedPlants = plants})
+      })
+
+
+    eventBus.$on("weatherDataSend",weather=>{
+
+    this.allWeather =weather['consolidated_weather']
+
+
+
+
+    })
+
+
+
   }
 }
 </script>

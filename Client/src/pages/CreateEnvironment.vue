@@ -2,6 +2,7 @@
   <div class="">
     <map-environment> </map-environment>
     <!-- <preset-environment> </preset-environment> -->
+    <!-- <virtual-garden v-if="showGarden"> </virtual-garden> -->
   </div>
 
 </template>
