@@ -1,14 +1,13 @@
-const baseUrl = "http://localhost:3000/5dee4a326a6cc91dbd3aaaad/gardens"
+const baseUrl = "http://localhost:3000/garden"
 
 export default{
-  postGarden(payload){
+  addPlant(payload){
     fetch(baseUrl,{
-      method: "PUT",
+      method: "POST",
       body: JSON.stringify(payload),
       headers: { 'Content-Type': 'application/json'}
-      })
-      .then(res => res.json());
-    },
+    }).then(res => res.json());
+  },
 
     getGardenEnvironment() {
     return fetch(baseUrl)
