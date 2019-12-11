@@ -1,12 +1,12 @@
 <template >
-  <div v-if='plant' class='border'>
-    <p>Common Name: {{plant['common_name']}}</p>
-    <p>Scientific Name: {{plant['scientific_name']}}</p>
-    <button @click.prevent='moreInfo' >Click here for More Information</button>
+  <div v-if='plant' class='border single-plant'>
+    <p>Common Name: <span>{{plant['common_name']}}</span></p>
+    <p>Scientific Name: <span>{{plant['scientific_name']}}</span></p>
+    <button class="btn btn-list" @click.prevent='moreInfo' >Click here for More Information</button>
     <div class="plant-info" v-if='show'>
       {{plantInformation}}
     </div>
-    <button @click='newPlant' type="button" name="button">Add Plant</button>
+    <button class="btn btn-list" @click='newPlant' type="button" name="button">Add Plant</button>
   </div>
 </template>
 
@@ -56,9 +56,6 @@ export default {
 
 <style lang="css" scoped>
 
-.border{
-  border: 2px solid slategrey;
-}
 .hidden{
   pointer-events: none;
   display: none;

@@ -103,10 +103,13 @@ nav ul li {
     background-repeat: no-repeat;
     background-position: bottom;
 }
-
+.welcome-content {
+    position: relative;
+}
 .welcomeBtn {
     width: 275px;
     margin: 0 auto;
+    display: block;
 }
 
 /* MAP PAGE  */
@@ -125,4 +128,43 @@ nav ul li {
     position: absolute;
     right: 22px;
     top: 8px;
+}
+
+
+/* PLANTS */
+.plant-list-container {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    position: relative;
+    padding: 20px;
+}
+.single-plant {
+    padding: 10px;
+    box-sizing: content-box;
+    width: 16%;
+    margin: 6px;
+    border: 6px solid var(--color);
+}
+.single-plant p {
+    font-size: 0.9em;
+    color: #4f4f4f;
+}
+.single-plant p span {
+    display: block;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--color);
+}
+.btn-list{
+    height: 33px;
+    background: #ffffff;
+    color: #020203;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: -2px 2px 0px #332b45;
+    margin: 10px 0;
+    display: block;
+    border: 3px solid;
 }
