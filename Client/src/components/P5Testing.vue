@@ -1,4 +1,4 @@
-
+<!--
 <template>
     <div id="p5CanvasBg"></div>
 </template>
@@ -94,4 +94,4 @@ mounted() {
     z-index: 0;
     bottom: -54px;
 }
-</style>
+</style> -->

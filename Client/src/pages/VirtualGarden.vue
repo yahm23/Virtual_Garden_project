@@ -2,7 +2,7 @@
   <div class="">
     <div :class="{hidden:modal}">
       <p>Virtual Garden connected</p>
-      <environment-detail :allWeather='allWeather'> </environment-detail>
+      <environment-detail :allWeather='allWeather' :coordsV='coordsV'> </environment-detail>
       <p>Recomended Plants: </p>
 
       <plant-list :plantList='allReccomendedData'></plant-list>
@@ -41,7 +41,7 @@ export default {
     'canvascomp':CanvasComponent,
     'environment-detail':EnvironmentDetail
   },
-  props:['gardenWOEID'],
+  props:['gardenWOEID','coordsV'],
   data(){
     return{
       recomendedPlants:'',
@@ -51,7 +51,9 @@ export default {
       allReccomendedData:[],
       modal:false,
       search:'',
-      plantsFound:[]
+      plantsFound:[],
+
+
 
 
 
@@ -107,13 +109,9 @@ export default {
 
 
     eventBus.$on("weatherDataSend",weather=>{
-
     this.allWeather =weather['consolidated_weather']
-
-
-
-
     })
+
 
 
 
