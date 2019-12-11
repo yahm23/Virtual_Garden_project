@@ -1,17 +1,39 @@
 <template >
   <div class="">
-    Canvas linked
-    <single-plant></single-plant>
+    <div  >
+      <p>CanvasTest</p>
+      <p5  v-for='(plant,index) in plants' :key='index' :plant='plant'></p5>
+    </div>
   </div>
 </template>
 
 <script>
 import SinglePlant from '@/components/SinglePlant.vue'
+import P5 from '@/components/P5Testing'
+import GardenServices from "../services/gardenServices"
+import {eventBus} from '../main.js'
+
 export default {
   name:"canvas-component",
   components:{
-    'single-plant':SinglePlant
-  }
+    'single-plant':SinglePlant,
+    'p5':P5,
+  },
+    data(){
+      return{
+        test:[1],
+        plants:[]
+      }
+    },
+    mounted(){
+
+        GardenServices.getPlants()
+        .then(res => this.plants = res)
+
+        // .then(res => console.log(res))
+
+
+    }
 }
 </script>
 

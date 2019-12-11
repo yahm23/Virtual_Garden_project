@@ -98,7 +98,7 @@ export default {
         draggable: true,
         visible: true,
         icon: L.icon({
-           iconSize: [90, 95],
+           iconSize: [34, 63],
            iconAnchor: [45, 95],
            iconUrl: "../img/map_marker.svg",
         })
@@ -117,5 +117,6 @@ export default {
     position: absolute;
     top: 90px;
     z-index: 0;
+    background: #aad3df;
 }
 </style>

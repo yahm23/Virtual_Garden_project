@@ -1,8 +1,15 @@
 <template >
+<<<<<<< HEAD
     <div class="plant-list-container">
     <single-plant v-for='(plant,index) in plantList' :key='index' :plant='plant' :weatherData='weatherData' :refreshTime="refreshTime"></single-plant>
+=======
+  <div class="plant-list-container">
+>>>>>>> 9dc833a5963881d747c4de151be642c7714571cb
 
-  </div>
+    <div class="plant-list">
+      <single-plant v-for='(plant,index) in plantList' :key='index' :plant='plant'></single-plant>
+    </div>
+    </div>
 </template>
 
 <script>

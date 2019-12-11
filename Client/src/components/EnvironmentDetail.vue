@@ -2,9 +2,12 @@
   <div class="fixed-menu">
     <div v-if='coords'>
       <div v-if='allWeather' class="fixed-menu-data">
-        <p > Temperature: {{allWeather[0]['the_temp'].toPrecision(2)}}°C    </p>
-        <p > Weather State: {{allWeather[0]['weather_state_name']}}    </p>
-        <p > Humidity: {{allWeather[0]['humidity']}}%    </p>
+        <p class="title">Location Garden</p>
+        <p><span>Temperature:</span> {{allWeather[0]['the_temp'].toPrecision(2)}}°C </p>
+        <span> | </span>
+        <p><span>Weather State:</span> {{allWeather[0]['weather_state_name']}} </p>
+        <span> | </span>
+        <p><span>Humidity:</span> {{allWeather[0]['humidity']}}%</p>
       </div>
 
       <div v-if='!coordsV' class="lat-log-box">
