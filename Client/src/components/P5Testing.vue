@@ -1,15 +1,6 @@
 
 <template>
     <div id="p5CanvasBg">
-
-
-
-
-
-
-
-
-
     </div>
 </template>
 
@@ -18,6 +9,7 @@ import VueP5 from "vue-p5";
 
 export default {
   name: "p5-example",
+  prop:['plant'],
   data: () => ({
 
 
@@ -29,6 +21,7 @@ export default {
 
   },
   mounted() {
+    // const growLevel = this.plant['water']*6
     const script = function (p5) {
 
       let angle = 0
@@ -40,10 +33,10 @@ export default {
     // NOTE: Set up is here
      p5.setup = _ => {
       // p5.angleMode(DEGREES);
-      p5.createCanvas(100, 500);
+      p5.createCanvas(200, 300);
 
       p5.stroke(255);
-      slider =p5.createSlider(0,3.14,1.5,0.001);
+      slider =p5.createSlider(0,3.5,1.5,0.001);
      // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
     }
     // NOTE: Draw is here
@@ -51,7 +44,7 @@ export default {
 
       p5.background(54);
      p5.translate(p5.width/2,p5.height);
-     p5.tree(p5.width/2,p5.height,150,slider.value(),0.5,3,0);
+     p5.tree(p5.width/2,p5.height,90,slider.value(),0.5,3,0);
 
 
     }

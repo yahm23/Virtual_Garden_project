@@ -1,11 +1,8 @@
 <template >
   <div class="">
-
     <div  >
-      
+      <p>CanvasTest</p>
       <p5  v-for='(plant,index) in plants' :key='index' :plant='plant'></p5>
-
-
     </div>
   </div>
 </template>
@@ -14,6 +11,7 @@
 import SinglePlant from '@/components/SinglePlant.vue'
 import P5 from '@/components/P5Testing'
 import GardenServices from "../services/gardenServices"
+import {eventBus} from '../main.js'
 
 export default {
   name:"canvas-component",
@@ -28,8 +26,13 @@ export default {
       }
     },
     mounted(){
-      GardenServices.getPlants()
-      .then(res => this.plants = res)
+
+        GardenServices.getPlants()
+        .then(res => this.plants = res)
+
+        // .then(res => console.log(res))
+
+
     }
 }
 </script>

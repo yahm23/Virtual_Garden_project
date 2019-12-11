@@ -47,7 +47,11 @@ export default {
       // eventBus.$emit('plant-added',this.plant);
       GardenServices.getPlants()
       .then(res => eventBus.$emit("getPlants", res))
+
+
     },
+
+
     toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
