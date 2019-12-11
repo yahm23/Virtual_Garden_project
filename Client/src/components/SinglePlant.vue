@@ -1,8 +1,8 @@
 <template >
   <div v-if='plant' class='border single-plant'>
-    <p>Common Name: {{toTitleCase(plant['common_name'])}}</p>
-    <p>Scientific Name: {{toTitleCase(plant['scientific_name'])}}</p>
-    <button class="btn btn-list" @click.prevent='moreInfo' >More Information</button>
+    <p>Common Name: <span>{{toTitleCase(plant['common_name'])}}</span></p>
+    <p>Scientific Name: <span>{{toTitleCase(plant['scientific_name'])}}</span></p>
+    <button class="btn-list-info" @click.prevent='moreInfo' >More Information</button>
     <div class="plant-info" v-if='show'>
       {{plantInformation}}
     </div>
