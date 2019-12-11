@@ -10,7 +10,7 @@
 <script>
 import VueP5 from 'vue-p5';
 export default {
-  name: 'HelloWorld',
+  name: 'p5-comp',
   data() {
     return {
       angle: 0,
@@ -20,15 +20,19 @@ export default {
       tronkWith: 50,
       tronkHeight: 100,
       long: null,
-      close: null
+      close: null,
+      plantInformation:''
     }
   },
   props: {
     msg: String
   },
+  computed:{
+    // minTempC:3
+  },
   methods: {
   setup: function(sk) {
-  sk.createCanvas(sk     .windowWidth - 82, 300);
+  sk.createCanvas(sk.windowWidth - 82, 300);
   sk.background(255,255,255);
   sk.growth = sk.createSlider(0, Math.PI/2, Math.PI/4, 0.01);
   sk.length = sk.createSlider(20,100, 2, 0.2);
@@ -81,6 +85,13 @@ branch: function(sk,len){
   },
   components: {
     "vue-p5": VueP5
+  },
+  mounted(){
+
+    // fetch(`http://localhost:3000/specificplant/${this.plant['id']}`)
+    //   .then(results=>results.json())
+    //   .then(plantInfo => this.plantInformation = plantInfo)
+
   }
 }
 </script>
