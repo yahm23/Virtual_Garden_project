@@ -1,8 +1,8 @@
 <template >
   <div v-if='plant' class='border single-plant'>
-    <p>Common Name: <span>{{plant['common_name']}}</span></p>
-    <p>Scientific Name: <span>{{plant['scientific_name']}}</span></p>
-    <button class="btn btn-list" @click.prevent='moreInfo' >Click here for More Information</button>
+    <p>Common Name: {{toTitleCase(plant['common_name'])}}</p>
+    <p>Scientific Name: {{toTitleCase(plant['scientific_name'])}}</p>
+    <button class="btn btn-list" @click.prevent='moreInfo' >More Information</button>
     <div class="plant-info" v-if='show'>
       {{plantInformation}}
     </div>
@@ -47,6 +47,11 @@ export default {
       // eventBus.$emit('plant-added',this.plant);
       GardenServices.getPlants()
       .then(res => eventBus.$emit("getPlants", res))
+    },
+    toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    })
     }
 
   }

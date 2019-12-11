@@ -67,3 +67,16 @@ app.get('/plants/:temp/:humidity', (req, res) => {
 
   console.log(data)})
 })
+
+app.get('/plantToSearch/:search', (req, res) => {
+  const search = req.params.search
+
+  const url = `https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&is_main_species=!null&q=${search}`
+
+  console.log(url);
+  fetch(url)
+  .then(jsonData => jsonData.json())
+  .then(data => {res.json(data)
+
+  console.log(data)})
+})
