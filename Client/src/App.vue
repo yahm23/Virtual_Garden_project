@@ -1,9 +1,20 @@
 <template>
   <div id="app">
-    <header></header>
+    <header>
+      <nav>
+        <div class="logoIcon">
+          <p>Virtual Garden</p>
+        </div>
+        <ul>
+          <li>Hello</li>
+          <li>About</li>
+          <li>Login</li>
+        </ul>
+      </nav>
+    </header>
     <welcome  v-if="showWelcome"> </welcome>
     <create-environment class="show-env" v-if="showEnvironment" :class="{hidden:!showEnvironment}"> </create-environment>
-    <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID'> </virtual-garden>
+    <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID' :coordsV='coordsV'> </virtual-garden>
   </div>
 </template>
 
@@ -25,7 +36,8 @@ export default {
       userID:'',
       gardenWOEID:'',
       gardenData:[],
-      plants:[]
+      allPlants:[],
+      coordsV:''
 
 
     }
@@ -44,11 +56,15 @@ export default {
     this.showGarden = true});
 
     eventBus.$on("gardenWOEID",id => this.gardenWOEID = id );
-    
+
     eventBus.$on("plant-added", plant => this.plants.push(plant));
 
     //weather
     eventBus.$on("weatherData", data => this.gardenData =data);
+
+    eventBus.$on('latAndLng', values =>{
+    this.coordsV = values;
+    })
 
   },
 

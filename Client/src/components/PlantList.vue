@@ -1,5 +1,5 @@
 <template >
-  <div >
+    <div class="plant-list-container">
     <single-plant v-for='(plant,index) in plantList' :key='index' :plant='plant' :weatherData='weatherData' :refreshTime="refreshTime"></single-plant>
 //Added weatherData as a prop
   </div>

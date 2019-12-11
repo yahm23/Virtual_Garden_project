@@ -1,8 +1,10 @@
 <template>
   <div class="welcome-intro">
-    <h1><span>Welcome to </span>Virtual Garden</h1>
-    <button @click="onClick" type="button" value="Proceed" class="btn welcomeBtn">Build Your Garden Environment!</button>
-    <p5-example/>
+    <!-- <p5-example/> -->
+    <div class="welcome-content">
+      <h1><span>Welcome to </span>Virtual Garden</h1>
+      <button @click="onClick" type="button" value="Proceed" class="btn welcomeBtn">Build Your Garden!</button>
+    </div>
   </div>
 </template>
 

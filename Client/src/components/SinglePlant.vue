@@ -1,12 +1,12 @@
 <template >
-  <div v-if='plant' class='border'>
-    <p>Common Name: {{plant['common_name']}}</p>
-    <p>Scientific Name: {{plant['scientific_name']}}</p>
-    <button @click.prevent='moreInfo' >Click here for More Information</button>
+  <div v-if='plant' class='border single-plant'>
+    <p>Common Name: {{toTitleCase(plant['common_name'])}}</p>
+    <p>Scientific Name: {{toTitleCase(plant['scientific_name'])}}</p>
+    <button class="btn btn-list" @click.prevent='moreInfo' >More Information</button>
     <div class="plant-info" v-if='show'>
       {{plantInformation}}
     </div>
-    <button @click='newPlant' type="button" name="button">Add Plant</button>
+    <button class="btn btn-list" @click='newPlant' type="button" name="button">Add Plant</button>
   </div>
 </template>
 
@@ -58,6 +58,16 @@ export default {
       // eventBus.$emit('plant-added',this.plant);
       // GardenServices.getPlants()
       // .then(res => eventBus.$emit("plant-added", this.plant))
+      GardenServices.getPlants()
+      .then(res => eventBus.$emit("getPlants", res))
+    },
+
+    toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    })
+    }
+
     },
 
     updatePlant(){
@@ -90,15 +100,12 @@ export default {
 
   }
 
-}
+
 
 </script>
 
 <style lang="css" scoped>
 
-.border{
-  border: 2px solid slategrey;
-}
 .hidden{
   pointer-events: none;
   display: none;
