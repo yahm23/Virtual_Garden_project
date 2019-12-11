@@ -61,7 +61,11 @@ export default {
       modal:false,
       search:'',
       plantsFound:[],
-      isActive: true
+
+
+
+
+
     }
   },
   methods:{

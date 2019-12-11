@@ -10,8 +10,12 @@
         <p><span>Humidity:</span> {{allWeather[0]['humidity']}}%</p>
       </div>
 
-      <div class="lat-log-box">
-        Lat: {{parseFloat(lat).toPrecision(4)}} | long: {{parseFloat(lng).toPrecision(4)}}
+      <div v-if='!coordsV' class="lat-log-box">
+        Lat: {{parseFloat(lat).toPrecision(4)}} | Long: {{parseFloat(lng).toPrecision(4)}}
+      </div>
+
+      <div v-if='coordsV' class="lat-log-box">
+        Lat: {{parseFloat(coordsV['lat']).toPrecision(4)}} | Long: {{parseFloat(coordsV['lng']).toPrecision(4)}}
       </div>
 
     </div>
@@ -23,12 +27,13 @@ import {eventBus} from '@/main.js';
 
 export default {
   name:'environment-detail',
-  props:['allWeather'],
+  props:['allWeather','coordsV'],
   data(){
     return{
       'coords':[],
       'lat':'0',
       'lng':'0',
+
       //'Weather':''
     }
   },

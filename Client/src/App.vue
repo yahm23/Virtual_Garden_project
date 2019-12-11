@@ -14,7 +14,7 @@
     </header>
     <welcome  v-if="showWelcome"> </welcome>
     <create-environment class="show-env" v-if="showEnvironment" :class="{hidden:!showEnvironment}"> </create-environment>
-    <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID'> </virtual-garden>
+    <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID' :coordsV='coordsV'> </virtual-garden>
   </div>
 </template>
 
@@ -36,7 +36,8 @@ export default {
       userID:'',
       gardenWOEID:'',
       gardenData:[],
-      allPlants:[]
+      allPlants:[],
+      coordsV:''
 
 
     }
@@ -62,6 +63,10 @@ export default {
 
     //weather data your mama fat
     eventBus.$on("weatherData", data => {this.gardenData = data})
+
+    eventBus.$on('latAndLng', values =>{
+    this.coordsV = values;
+    })
 
   },
 
