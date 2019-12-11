@@ -2,8 +2,9 @@
   <div class="">
 
     <div  >
-
+      
       <p5  v-for='(plant,index) in plants' :key='index' :plant='plant'></p5>
+
 
     </div>
   </div>
