@@ -53,7 +53,7 @@ app.get('/plants/:temp/:humidity', (req, res) => {
 
   // console.log(data)
 })
-<<<<<<< HEAD
+
 })
 
 const MongoClient = require('mongodb').MongoClient;
@@ -71,7 +71,7 @@ MongoClient.connect('mongodb://localhost:27017')
 app.listen(3000, function(){
   console.log(`Listening on port ${this.address().port}`);
 });
-=======
+
 
 app.get('/plantToSearch/:search', (req, res) => {
   const search = req.params.search
@@ -85,4 +85,4 @@ app.get('/plantToSearch/:search', (req, res) => {
 
   console.log(data)})
 })
->>>>>>> 51af138abaf33f3fd448a663da46370e28956047
+

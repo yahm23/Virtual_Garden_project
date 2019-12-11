@@ -1,7 +1,7 @@
 <template >
     <div class="plant-list-container">
     <single-plant v-for='(plant,index) in plantList' :key='index' :plant='plant' :weatherData='weatherData' :refreshTime="refreshTime"></single-plant>
-//Added weatherData as a prop
+
   </div>
 </template>
 
@@ -12,7 +12,6 @@ export default {
   data(){
     return{
       plantData:[],
-      weatherData:[],
       refreshTime:1
     }
   },
@@ -20,7 +19,7 @@ export default {
     'single-plant':SinglePlant
   },
 
-  props:['plantList']
+  props:['plantList','weatherData']
 }
 </script>
 

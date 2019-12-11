@@ -5,7 +5,7 @@
       <environment-detail :allWeather='allWeather' :coordsV='coordsV'> </environment-detail>
       <p>Recomended Plants: </p>
 
-      <plant-list :plantList='allReccomendedData'></plant-list>
+      <plant-list :plantList='allReccomendedData' :weatherData="allWeather[0]"></plant-list>
       <p></p>
 
       <canvascomp></canvascomp>
@@ -41,7 +41,7 @@ export default {
     'canvascomp':CanvasComponent,
     'environment-detail':EnvironmentDetail
   },
-  props:['gardenWOEID','coordsV'],
+  props:['gardenWOEID','coordsV','weatherData'],
   data(){
     return{
       recomendedPlants:'',

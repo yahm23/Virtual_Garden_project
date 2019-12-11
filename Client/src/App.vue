@@ -14,7 +14,7 @@
     </header>
     <welcome  v-if="showWelcome"> </welcome>
     <create-environment class="show-env" v-if="showEnvironment" :class="{hidden:!showEnvironment}"> </create-environment>
-    <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID' :coordsV='coordsV'> </virtual-garden>
+    <virtual-garden v-if="showGarden" :gardenWOEID='gardenWOEID' :coordsV='coordsV' :gardenData = 'gardenData'> </virtual-garden>
   </div>
 </template>
 

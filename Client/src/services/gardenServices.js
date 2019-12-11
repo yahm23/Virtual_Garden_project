@@ -3,20 +3,20 @@ const baseUrl = "http://localhost:3000/garden"
 export default {
   //***************************
   //PLANT SERVICES
-  
-  //INDEX 
+
+  //INDEX
   getPlants() {
     return fetch(baseUrl)
       .then(res => res.json());
   },
-  
+
   //SHOW
     showPlant(id){
-      return fetch(baseUrl + id )
+      return fetch(baseUrl + "/" + id )
       .then(res => res.json());
     },
   //ADD PLANT
-  
+
   addPlant(payload) {
     return fetch(baseUrl, {
       method: "POST",
@@ -26,12 +26,12 @@ export default {
       }
     })
     .then(res => res.json())
-    
+
   },
-  
+
   //UPDATE
-  updateP(payload) {
-    fetch(baseUrl + payload.id, {
+  updateP(payload,id) {
+    fetch(baseUrl + id, {
       method: "PUT",
       body: JSON.stringify(payload),
       headers: {
