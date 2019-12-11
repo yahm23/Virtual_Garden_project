@@ -40,10 +40,10 @@ export default {
     // NOTE: Set up is here
      p5.setup = _ => {
       // p5.angleMode(DEGREES);
-      p5.createCanvas(500, 500);
+      p5.createCanvas(100, 500);
 
       p5.stroke(255);
-      slider =p5.createSlider(0,180,50,0.01);
+      slider =p5.createSlider(0,3.14,1.5,0.001);
      // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
     }
     // NOTE: Draw is here

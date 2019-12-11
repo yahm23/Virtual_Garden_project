@@ -1,17 +1,27 @@
 <template >
   <div class="">
-    Canvas linked
-    <single-plant></single-plant>
+
+    <div v-for="item in test" >
+
+      <p5></p5>
+    </div>
   </div>
 </template>
 
 <script>
 import SinglePlant from '@/components/SinglePlant.vue'
+import P5 from '@/components/P5Testing'
 export default {
   name:"canvas-component",
   components:{
-    'single-plant':SinglePlant
-  }
+    'single-plant':SinglePlant,
+    'p5':P5,
+  },
+    data(){
+      return{
+        test:[1]
+      }
+    }
 }
 </script>
 
