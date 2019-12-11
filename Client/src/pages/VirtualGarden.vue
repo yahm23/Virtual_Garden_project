@@ -16,6 +16,7 @@
         <h6>Recomended Plants:</h6>
         <plant-list :plantList='allReccomendedData'></plant-list>
       </div>
+      <canvascomp></canvascomp>
     </div>
 
         <button @click= 'modalActivate' v-if='!modal'type="button" name="button" class="btn search-plant">Search for a specific Plant</button>
@@ -26,8 +27,8 @@
           <plant-list :plantList='plantsFound'></plant-list>
           <button @click='searchPlants'type="button" name="button" class="btn searcherBtn">Search</button>
           <button @click='modalActivate'type="button" name="button" class="btn searcherBtn">Close</button>
-        </div>
 
+        </div>
 
   </div>
 
@@ -36,6 +37,8 @@
 
 
 </template>
+
+
 <script>
 import PlantList from'@/components/PlantList.vue'
 import PlantSearch from'@/components/PlantList.vue'
@@ -61,6 +64,7 @@ export default {
       modal:false,
       search:'',
       plantsFound:[],
+      canvasPLants:''
 
 
 
@@ -100,6 +104,10 @@ export default {
     },
   },
   mounted(){
+    // eventBus.$on("getPlants",()=>{
+    //   GardenServices.getPlants()
+    //   .then(res => this.canvasPLants = res)
+    // })
     fetch(`http://localhost:3000/woeid/${this.gardenWOEID}`)
       .then(results=>results.json())
       .then(weather =>{

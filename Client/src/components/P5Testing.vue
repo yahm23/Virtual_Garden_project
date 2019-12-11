@@ -1,6 +1,7 @@
-<!--
+
 <template>
-    <div id="p5CanvasBg"></div>
+    <div id="p5CanvasBg">
+    </div>
 </template>
 
 <script>
@@ -8,7 +9,9 @@ import VueP5 from "vue-p5";
 
 export default {
   name: "p5-example",
+  prop:['plant'],
   data: () => ({
+
 
   }),
   computed: {
@@ -17,73 +20,57 @@ export default {
   methods: {
 
   },
-mounted() {
-   const script = function (p5) {
-  //   var speed = -1;
-  //   var posX = 1000;
-  //
-  //
-  //    p5.setup = _ => {
-  //    var canvas = p5.createCanvas(window.innerWidth - 82, window.innerHeight - 135);
-  //    canvas.parent("p5CanvasBg");
-  //    p5.background( 255,255,255);
-  //   }
-  //
-  //    p5.draw = _ => {
-  //
-  //    p5.containener = _ => {
-  //    p5.strokeWeight(5);
-  //    p5.triangle(-6, p5.height +5, -6, p5.height / 2 + 5, p5.width / 7, p5.height +5);
-  // }
-  //
-  // p5.strokeWeight(5);
-  // p5.triangle(p5.width /2 , p5.height +5, -6, p5.height / 2 + 5, p5.width / 7, p5.height +5);
-  // p5.triangle(p5.width, p5.width, 50, 50, 150, p5.height);
-  //
-  // }
-  let distances = [];
-  let maxDistance;
-  let spacer;
+  mounted() {
+    // const growLevel = this.plant['water']*6
+    const script = function (p5) {
 
-   p5.setup = _ => {
-     var canvas = p5.createCanvas(window.innerWidth - 82, window.innerHeight - 135);
-    //    canvas.parent("p5CanvasBg");
-    p5.maxDistance = p5.dist(p5.width / 2, p5.height / 2, p5.width, p5.height);
-    for (let x = 0; x < p5.width; x++) {
-      p5.distances[x] = []; // create nested array
-      for (let y = 0; y < p5.height; y++) {
-        let distance = p5.dist(p5.width / 2, p5.height / 2, x, y);
-        p5.distances[x][y] = (p5.distance / p5.maxDistance) * 255;
+      let angle = 0
+      let slider;
+
+      // var speed = 2;
+      // var posX = 0;
+
+    // NOTE: Set up is here
+     p5.setup = _ => {
+      // p5.angleMode(DEGREES);
+      p5.createCanvas(200, 300);
+
+      p5.stroke(255);
+      slider =p5.createSlider(0,3.5,1.5,0.001);
+     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
+    }
+    // NOTE: Draw is here
+    p5.draw = _ => {
+
+      p5.background(54);
+     p5.translate(p5.width/2,p5.height);
+     p5.tree(p5.width/2,p5.height,90,slider.value(),0.5,3,0);
+
+
+    }
+    p5.tree = (x,y,len,angle,scl,n,startingColor) =>{
+      p5.stroke(startingColor,100,100);
+      p5.line(0,0,0,-len);
+      p5.translate(0,-len);
+
+      if (len>1){
+        for (let i=0;i<n;i++){
+          p5.push();
+          p5.rotate(-angle+2*angle*i/(n-1));
+          p5.tree(0,0,len*scl,angle,scl,n,startingColor+20);
+          p5.pop();
+        }
       }
     }
-    spacer = 10;
-    p5.noLoop(); // Run once and stop
-  }
-
-  p5.draw = _ => {
-    p5.background(0);
-    // This embedded loop skips over values in the arrays based on
-    // the spacer variable, so there are more values in the array
-    // than are drawn here. Change the value of the spacer variable
-    // to change the density of the points
-    for (let x = 0; x < p5.width; x += p5.spacer) {
-      for (let y = 0; y < p5.height; y += p5.spacer) {
-        p5.stroke(p5.distances[x][y]);
-        p5.point(x + p5.spacer / 2, y + p5.spacer / 2);
-      }
-    }
-  }
 
 
- }
- // : Use p5 as an instance mode
- const P5 = require('p5');
- new P5(script)
+   }
+   // NOTE: Use p5 as an instance mode
+   const P5 = require('p5');
+   new P5(script)
+}}
 
 
-}
-
-}
 </script>
 
 
@@ -94,4 +81,4 @@ mounted() {
     z-index: 0;
     bottom: -54px;
 }
-</style> -->
+</style>
