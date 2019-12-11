@@ -33,7 +33,7 @@ export default {
     // NOTE: Set up is here
      p5.setup = _ => {
       // p5.angleMode(DEGREES);
-      p5.createCanvas(200, 300);
+      p5.createCanvas(p5.windowWidth - 82, 300);
 
       p5.stroke(255);
       slider =p5.createSlider(0,3.5,1.5,0.001);
@@ -42,8 +42,8 @@ export default {
     // NOTE: Draw is here
     p5.draw = _ => {
 
-      p5.background(54);
-     p5.translate(p5.width/2,p5.height);
+      p5.background(255,255,255);
+     p5.translate(p5.width / 1.4 ,p5.height);
      p5.tree(p5.width/2,p5.height,90,slider.value(),0.5,3,0);
 
 

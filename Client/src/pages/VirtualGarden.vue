@@ -16,7 +16,6 @@
         <h6>Recomended Plants:</h6>
         <plant-list :plantList='allReccomendedData'></plant-list>
       </div>
-      <canvascomp></canvascomp>
     </div>
 
         <button @click= 'modalActivate' v-if='!modal'type="button" name="button" class="btn search-plant">Search for a specific Plant</button>
@@ -29,6 +28,7 @@
           <button @click='modalActivate'type="button" name="button" class="btn searcherBtn">Close</button>
 
         </div>
+        <canvascomp></canvascomp>
 
   </div>
 

@@ -1,8 +1,12 @@
 <template >
   <div class="">
-    <div  >
-      <p>CanvasTest</p>
-      <p5  v-for='(plant,index) in plants' :key='index' :plant='plant'></p5>
+    <div v-for='plant in plants' :plant='plant' class="rowPlants">
+      <div class="specsPlant">
+          <p>{{plant['name']}}</p>
+      </div>
+
+      <p5 :plant='plant' >{{plant['name']}</p5>
+
     </div>
   </div>
 </template>

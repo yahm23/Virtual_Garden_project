@@ -272,3 +272,11 @@ button.btn.search-plant {
     margin: 0 10px;
     box-shadow: -3px 3px #382367;
 }
+
+/* SPECS PLANTS */
+.specsPlant {
+    height: 292px;
+    padding: 0 20px;
+    margin-bottom: 37px;
+    pointer-events: none;
+}
