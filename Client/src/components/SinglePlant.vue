@@ -39,7 +39,9 @@ export default {
         "name": this.plant.common_name,
  	      "plantApiId": this.plant.id,
         "water": 0.5,
-        "birthDate": Date()
+        "birthDate": Date(),
+        "tempMin": this.getMinTemp()
+
       }
       GardenServices.addPlant(newPlant)
       .then( () => GardenServices.getPlants()
@@ -48,6 +50,17 @@ export default {
       GardenServices.getPlants()
       .then(res => eventBus.$emit("getPlants", res))
 
+
+    },
+
+    getMinTemp(){
+      this.moreInfo()
+      let temp = 10
+      if(this.plantInformation['main_species']['growth']['temperature_minimum']['deg_c']!=undefined){
+        temp = this.plantInformation['main_species']['growth']['temperature_minimum']['deg_c']
+        return temp
+      }
+      return temp
 
     },
 

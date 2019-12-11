@@ -1,84 +1,103 @@
-
 <template>
-    <div id="p5CanvasBg">
-    </div>
+  <div>
+    <vue-p5
+    @setup="setup"
+    @draw="draw"
+    >
+    </vue-p5>
+  </div>
 </template>
-
 <script>
-import VueP5 from "vue-p5";
-
+import VueP5 from 'vue-p5';
 export default {
-  name: "p5-example",
-  prop:['plant'],
-  data: () => ({
-
-
-  }),
-  computed: {
-
+  name: 'HelloWorld',
+  data() {
+    return {
+      angle: 0,
+      slider: null,
+      lon: 100,
+      volume: 20,
+      tronkWith: 50,
+      tronkHeight: 100,
+      long: null,
+      close: null
+    }
+  },
+  props: {
+    msg: String
   },
   methods: {
-
+  setup: function(sk) {
+  sk.createCanvas(sk     .windowWidth - 82, 300);
+  sk.background(255,255,255);
+  sk.growth = sk.createSlider(0, Math.PI/2, Math.PI/4, 0.01);
+  sk.length = sk.createSlider(20,100, 2, 0.2);
+  // sk.longness = sk.createSlider(0.10, 0.70, 0.1, 0.01);
+  // sk.closeness = sk.createSlider(0, 1, 0.1, 0.02);
   },
-  mounted() {
-    // const growLevel = this.plant['water']*6
-    const script = function (p5) {
-
-      let angle = 0
-      let slider;
-
-      // var speed = 2;
-      // var posX = 0;
-
-    // NOTE: Set up is here
-     p5.setup = _ => {
-      // p5.angleMode(DEGREES);
-      p5.createCanvas(p5.windowWidth - 82, 300);
-
-      p5.stroke(255);
-      slider =p5.createSlider(0,3.5,1.5,0.001);
-     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
-    }
-    // NOTE: Draw is here
-    p5.draw = _ => {
-
-      p5.background(255,255,255);
-     p5.translate(p5.width / 1.4 ,p5.height);
-     p5.tree(p5.width/2,p5.height,90,slider.value(),0.5,3,0);
-
-
-    }
-    p5.tree = (x,y,len,angle,scl,n,startingColor) =>{
-      p5.stroke(startingColor,100,100);
-      p5.line(0,0,0,-len);
-      p5.translate(0,-len);
-
-      if (len>1){
-        for (let i=0;i<n;i++){
-          p5.push();
-          p5.rotate(-angle+2*angle*i/(n-1));
-          p5.tree(0,0,len*scl,angle,scl,n,startingColor+20);
-          p5.pop();
-        }
-      }
-    }
-
-
-   }
-   // NOTE: Use p5 as an instance mode
-   const P5 = require('p5');
-   new P5(script)
-}}
-
-
+ draw: function(sk) {
+  sk.background(51);
+  this.volume = sk.length.value();
+  this.angle = sk.growth.value();
+  this.long = 0.6;
+  this.close = 0.4;
+  sk.stroke(255);
+  sk.translate(200,sk.height);
+  this.branch(sk,this.lon);
+},
+branch: function(sk,len){
+  sk.strokeWeight((len/this.lon * 5));
+  if(len/this.lon * 5 === 5){
+    sk.strokeWeight(this.tronkWith);
+    len = this.tronkHeight;
+  }
+  sk.line(0,0,0,-len);
+  sk.translate(0,-len);
+  if(len > this.volume ){
+    sk.push();
+    sk.rotate(this.angle);
+    this.branch(sk,len * this.long);
+    sk.pop();
+    sk.push();
+    sk.rotate(-this.angle);
+    this.branch(sk,len * this.long);
+    sk.pop();
+    sk.push();
+    sk.rotate(-this.angle * this.close);
+    this.branch(sk,len * this.long);
+    sk.pop();
+    sk.push();
+    sk.rotate(this.angle * this.close);
+    this.branch(sk,len * this.long);
+    sk.pop();
+  }
+},
+  keypressed: function(sk) {
+    // convert the key code to it's string
+    // representation and print it
+    const key = String.fromCharCode(sk.keyCode);
+    sk.print(key);
+  }
+  },
+  components: {
+    "vue-p5": VueP5
+  }
+}
 </script>
-
-
-<style media="screen">
-#p5CanvasBg {
-    position: absolute;
-    height: 100%;
-    z-index: 0;
-    bottom: -54px;
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
 }
 </style>
