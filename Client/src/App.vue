@@ -25,7 +25,7 @@ export default {
       userID:'',
       gardenWOEID:'',
       gardenData:[],
-      allPlants:[]
+      plants:[]
 
 
     }
@@ -44,13 +44,11 @@ export default {
     this.showGarden = true});
 
     eventBus.$on("gardenWOEID",id => this.gardenWOEID = id );
-    // eventBus.$on("plant-added", plant => this.plants.push(plant));
-    eventBus.$on('getPlants', data => {
-      this.Allplants = data;
-    });
+    
+    eventBus.$on("plant-added", plant => this.plants.push(plant));
 
-    //weather data your mama fat
-    eventBus.$on("weatherData", data => {this.gardenData = data})
+    //weather
+    eventBus.$on("weatherData", data => this.gardenData =data);
 
   },
 
