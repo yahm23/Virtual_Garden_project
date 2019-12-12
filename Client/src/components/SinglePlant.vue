@@ -4,7 +4,10 @@
     <p>Scientific Name: <span>{{toTitleCase(plant['scientific_name'])}}</span></p>
     <button class="btn-list-info" @click.prevent='moreInfo' >More Information</button>
     <div class="plant-info" v-if='show'>
-      {{plantInformation}}
+      <!-- {{plantInformation}} -->
+      <p v-if ="plantInformation['main_species']['growth']['temperature_minimum'].deg_c">minimum temperature: {{plantInformation['main_species']['growth']['temperature_minimum'].deg_c}} °C</p>
+      <p v-if = "plantInformation['main_species']['growth']['precipitation_minimum'].cm" >mature_height: {{plantInformation['main_species']['growth']['precipitation_minimum'].cm}} cm</p>
+      <p v-if = "plantInformation['main_species']['specifications']['growth_rate']" >Growth Rate: {{plantInformation['main_species']['specifications']['growth_rate']}}</p>
     </div>
     <button class="btn btn-list" @click='newPlant' type="button" name="button">Add Plant</button>
   </div>
@@ -14,24 +17,26 @@
 import GardenServices from "../services/gardenServices"
 import {eventBus} from "../main.js"
 export default {
-
   name:'single-plant',
   props:['plant'],
   data(){
     return{
       plantInformation:[],
+
       show: false
     }
   },
   mounted(){
-    GardenServices.getPlants()
-    .then(res => console.log(res))
+
   },
   methods:{
     moreInfo(){
       fetch(`http://localhost:3000/specificplant/${this.plant['id']}`)
         .then(results=>results.json())
-        .then(plantInfo => this.plantInformation = plantInfo)
+        .then(plantInfo => {
+          this.plantInformation = plantInfo
+          //set data values
+        })
         this.show = !this.show
     },
 
@@ -41,7 +46,7 @@ export default {
  	      "plantApiId": this.plant.id,
         "water": 0.5,
         "birthDate": Date(),
-        "tempMin": this.getMinTemp()
+        "tempMin": this.getMinTemp
 
       }
       GardenServices.addPlant(newPlant)
@@ -58,7 +63,7 @@ export default {
       fetch(`http://localhost:3000/specificplant/${this.plant['id']}`)
         .then(results=>results.json())
         .then(plantInfo => this.plantInformation = plantInfo)
-        
+
       let temp = 10
 
 
