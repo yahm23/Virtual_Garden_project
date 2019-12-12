@@ -30,10 +30,13 @@ export default {
   },
   methods: {
   setup: function(sk) {
+    // let randVal = (Math.random()*20)
+    let randVal = 8
+    let value = 1
   sk.createCanvas(sk.windowWidth - 82, 300);
   sk.background(255,255,255);
-  sk.growth = sk.createSlider(0, Math.PI/2, Math.PI/4, 0.01);
-  sk.length = sk.createSlider(20,100, 2, 0.2);
+  sk.growth = sk.createSlider(0, Math.PI/(2*randVal), Math.PI/4, 0.01);
+  sk.length = sk.createSlider(20,100*value, 2, 0.2);
   // sk.longness = sk.createSlider(0.10, 0.70, 0.1, 0.01);
   // sk.closeness = sk.createSlider(0, 1, 0.1, 0.02);
   },
