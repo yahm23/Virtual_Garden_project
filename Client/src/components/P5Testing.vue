@@ -23,7 +23,9 @@ export default {
       tronkHeight: 100,
       long: null,
       close: null,
-      plantInformation:''
+      plantInformation:'',
+      tempVal:(Math.random()*20),
+      water:(Math.random()*10)
     }
   },
   props:['plant'],
@@ -32,13 +34,11 @@ export default {
   },
   methods: {
   setup: function(sk) {
-    // let randVal = (Math.random()*20)
-    let randVal = 8
-    let value = 1
+
   sk.createCanvas(sk.windowWidth - 182, 300);
   sk.background(255,255,255);
-  sk.growth = sk.createSlider(0, Math.PI/(2*randVal), Math.PI/4, 0.01);
-  sk.length = sk.createSlider(20,100*value, 2, 0.2);
+  sk.growth = sk.createSlider(0, Math.PI/(2*this.tempVal), Math.PI/4, 0.01);
+  sk.length = sk.createSlider(20,100*this.water, 2, 0.2);
   // sk.longness = sk.createSlider(0.10, 0.70, 0.1, 0.01);
   // sk.closeness = sk.createSlider(0, 1, 0.1, 0.02);
   },
@@ -80,18 +80,21 @@ export default {
       sk.pop();
     }
   }},
-  // keypressed: function(sk) {
-  //   // convert the key code to it's string
-  //   // representation and print it
-  //   const key = String.fromCharCode(sk.keyCode);
-  //   sk.print(key);
-  // }
-  // },
+
   components: {
     "vue-p5": VueP5
   },
   mounted(){
     console.log(this.plant);
+
+    if (this.plant['main_species']['growth']['temperature_minimum']['deg_c']){
+       this.tempVal = this.plant['main_species']['growth']['temperature_minimum']['deg_c']
+    }
+
+    if (this.plant['main_species']['growth']['precipitation_minimum']['cm']){
+       this.water = this.plant['main_species']['growth']['precipitation_minimum']['cm']
+    }
+
 
     fetch(`http://localhost:3000/specificplant/${this.plant['id']}`)
       .then(results=>results.json())
