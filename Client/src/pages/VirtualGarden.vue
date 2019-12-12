@@ -2,6 +2,8 @@
 <template lang="html">
 
 
+<div class="">
+
 
   <div class="enviroment-container">
     <!-- WEATHER DATA -->
@@ -28,11 +30,11 @@
           <button @click='modalActivate'type="button" name="button" class="btn searcherBtn">Close</button>
 
         </div>
-        <canvascomp></canvascomp>
+
 
   </div>
-
-
+  <canvascomp class="canvasComp"></canvascomp>
+</div>
 
 
 

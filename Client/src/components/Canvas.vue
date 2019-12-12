@@ -1,16 +1,12 @@
 <template >
   <div v-if='plants'>
+
+
     <div  class="rowPlants">
-      <div v-for='plant in plants' class="specsPlant">
-          <p>{{plant['name']}}</p>
-        <!-- <single-plant  :plant='plant'></single-plant> -->
-      </div>
-
-      <p5 v-for='(plant,id) in plants' :key='id' :plant='plant'></p5>
-
-
-
+      <h3>Your garden</h3>
+          <p5 v-for='(plant,id) in plants' :key='id' :plant='plant'></p5>
     </div>
+
   </div>
 </template>
 
