@@ -48,7 +48,7 @@ app.get('/woeid/:woeid', (req, res) => {
 app.get('/specificplant/:id', (req, res) => {
   const id = req.params.id
   const url = `https://trefle.io/api/plants/${id}/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09`
-  console.log(url);
+  console.log('specificplant request',url);
   fetch(url)
   .then(jsonData => jsonData.json())
   .then(data => res.json(data))
@@ -60,7 +60,7 @@ app.get('/plants/:temp/:humidity', (req, res) => {
 
   const url = `https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&comlete_data&is_main_species=true&temperature_minimum_deg_f>${temp}&precipitation_minimum>${humidity}`
 
-  console.log(url);
+  console.log(':tmemp and humidity request',url);
   fetch(url)
   .then(jsonData => jsonData.json())
   .then(data => {res.json(data)
