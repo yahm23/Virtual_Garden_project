@@ -5,9 +5,14 @@
     <button class="btn-list-info" @click.prevent='moreInfo' >More Information</button>
     <div class="plant-info" v-if='show'>
       <!-- {{plantInformation}} -->
-      <p v-if ="plantInformation['main_species']['growth']['temperature_minimum'].deg_c">minimum temperature: {{plantInformation['main_species']['growth']['temperature_minimum'].deg_c.toPrecision(4)}} °C</p>
-      <p v-if = "plantInformation['main_species']['growth']['precipitation_minimum'].cm" >mature_height: {{plantInformation['main_species']['growth']['precipitation_minimum'].cm.toPrecision(4)}} cm</p>
+      <p v-if ="plantInformation['main_species']['growth']['temperature_minimum'].deg_c">Minimum Temperature: {{plantInformation['main_species']['growth']['temperature_minimum'].deg_c.toPrecision(4)}} °C</p>
+      <p v-if ="plantInformation['main_species']['growth']['precipitation_minimum'].cm">Minimum Precipitation: {{plantInformation['main_species']['growth']['precipitation_minimum'].cm.toPrecision(4)}} cm</p>
+      <p v-if ="plantInformation['main_species']['growth']['precipitation_maximum'].cm">Maximum Precipitation: {{plantInformation['main_species']['growth']['precipitation_maximum'].cm.toPrecision(4)}} cm</p>
+      <p v-if = "plantInformation['main_species']['growth']['precipitation_minimum'].cm" >Mature Height: {{plantInformation['main_species']['growth']['precipitation_minimum'].cm.toPrecision(4)}} cm</p>
       <p v-if = "plantInformation['main_species']['specifications']['growth_rate']" >Growth Rate: {{plantInformation['main_species']['specifications']['growth_rate']}}</p>
+      <div class='show-img' v-if = "plantInformation['images']">
+        <img :src="plantInformation['images'][0].url" alt="">
+      </div>
     </div>
     <button class="btn btn-list" @click='newPlant' type="button" name="button">Add Plant</button>
   </div>
@@ -104,5 +109,8 @@ export default {
   pointer-events: none;
   display: none;
   visibility: hidden;
+}
+.show-img img {
+  width:100%;
 }
 </style>
