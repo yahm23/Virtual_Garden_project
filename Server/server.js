@@ -58,7 +58,7 @@ app.get('/plants/:temp/:humidity', (req, res) => {
   const temp = req.params.temp
   const humidity = req.params.humidity
 
-  const url = `https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&comlete_data=true&is_main_species=true&temperature_minimum_deg_f>${temp}&precipitation_minimum>${humidity}`
+  const url = `https://trefle.io/api/plants/?token=Sk1pZTUyTDVMWCtRaVcyaVpBbFl1QT09&comlete_data&is_main_species=true&temperature_minimum_deg_f>${temp}&precipitation_minimum>${humidity}`
 
   console.log(url);
   fetch(url)
