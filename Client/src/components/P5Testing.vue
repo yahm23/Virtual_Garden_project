@@ -1,9 +1,11 @@
 <template>
   <div>
-    <vue-p5
-    @setup="setup"
-    @draw="draw">
-    </vue-p5>
+    <vue-p5 @setup="setup" @draw="draw"></vue-p5>
+    <div class="renderInfo">
+      <h4>{{plant['name']}}</h4>
+      <p>Planted on: {{plant['birthDate']}}</p>
+    </div>
+
 
   </div>
 </template>
@@ -30,7 +32,7 @@ export default {
   },
   methods: {
   setup: function(sk) {
-  sk.createCanvas(sk.windowWidth - 82, 300);
+  sk.createCanvas(sk.windowWidth - 182, 300);
   sk.background(255,255,255);
   sk.growth = sk.createSlider(0, Math.PI/2, Math.PI/4, 0.01);
   sk.length = sk.createSlider(20,100, 2, 0.2);

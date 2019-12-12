@@ -6,9 +6,8 @@
           <p>Virtual Garden</p>
         </div>
         <ul>
-          <li>Hello</li>
-          <li>About</li>
-          <li>Login</li>
+
+          <li>By Tree-o</li>
         </ul>
       </nav>
     </header>
