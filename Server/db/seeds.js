@@ -2,29 +2,7 @@ use virtualGarden;
 db.dropDatabase();
 
 db.plants.insertMany([
-  {
-    name: "Bob",
-    ApiId: 23446623,
-    water: 0.5,
-    birthDate: 'date'
-  },
-  {
-    name: "Rick",
-    ApiId: 234523,
-    water: 0.5,
-    birthDate: 'date'
-  },{
-    name:"plantiePant",
-    ApiId: 25345423,
-    water: 0.5,
-    birthDate: 'date'
-  },
-  {
-    name: "Rok",
-    ApiId: 2343453,
-    water: 0.5,
-    birthDate: 'date'
-  }
+  
 ]);
 
 

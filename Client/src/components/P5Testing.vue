@@ -2,9 +2,9 @@
   <div>
     <vue-p5
     @setup="setup"
-    @draw="draw"
-    >
+    @draw="draw">
     </vue-p5>
+
   </div>
 </template>
 <script>
@@ -24,9 +24,7 @@ export default {
       plantInformation:''
     }
   },
-  props: {
-    msg: String
-  },
+  props:['plant'],
   computed:{
     // minTempC:3
   },
@@ -39,58 +37,60 @@ export default {
   // sk.longness = sk.createSlider(0.10, 0.70, 0.1, 0.01);
   // sk.closeness = sk.createSlider(0, 1, 0.1, 0.02);
   },
- draw: function(sk) {
-  sk.background(51);
-  this.volume = sk.length.value();
-  this.angle = sk.growth.value();
-  this.long = 0.6;
-  this.close = 0.4;
-  sk.stroke(255);
-  sk.translate(200,sk.height);
-  this.branch(sk,this.lon);
-},
-branch: function(sk,len){
-  sk.strokeWeight((len/this.lon * 5));
-  if(len/this.lon * 5 === 5){
-    sk.strokeWeight(this.tronkWith);
-    len = this.tronkHeight;
-  }
-  sk.line(0,0,0,-len);
-  sk.translate(0,-len);
-  if(len > this.volume ){
-    sk.push();
-    sk.rotate(this.angle);
-    this.branch(sk,len * this.long);
-    sk.pop();
-    sk.push();
-    sk.rotate(-this.angle);
-    this.branch(sk,len * this.long);
-    sk.pop();
-    sk.push();
-    sk.rotate(-this.angle * this.close);
-    this.branch(sk,len * this.long);
-    sk.pop();
-    sk.push();
-    sk.rotate(this.angle * this.close);
-    this.branch(sk,len * this.long);
-    sk.pop();
-  }
-},
-  keypressed: function(sk) {
-    // convert the key code to it's string
-    // representation and print it
-    const key = String.fromCharCode(sk.keyCode);
-    sk.print(key);
-  }
+   draw: function(sk) {
+    sk.background(51);
+    this.volume = sk.length.value();
+    this.angle = sk.growth.value();
+    this.long = 0.6;
+    this.close = 0.4;
+    sk.stroke(255);
+    sk.translate(200,sk.height);
+    this.branch(sk,this.lon);
+    // sk.noLoop()
   },
+  branch: function(sk,len){
+    sk.strokeWeight((len/this.lon * 5));
+    if(len/this.lon * 5 === 5){
+      sk.strokeWeight(this.tronkWith);
+      len = this.tronkHeight;
+    }
+    sk.line(0,0,0,-len);
+    sk.translate(0,-len);
+    if(len > this.volume ){
+      sk.push();
+      sk.rotate(this.angle);
+      this.branch(sk,len * this.long);
+      sk.pop();
+      sk.push();
+      sk.rotate(-this.angle);
+      this.branch(sk,len * this.long);
+      sk.pop();
+      sk.push();
+      sk.rotate(-this.angle * this.close);
+      this.branch(sk,len * this.long);
+      sk.pop();
+      sk.push();
+      sk.rotate(this.angle * this.close);
+      this.branch(sk,len * this.long);
+      sk.pop();
+    }
+  }},
+  // keypressed: function(sk) {
+  //   // convert the key code to it's string
+  //   // representation and print it
+  //   const key = String.fromCharCode(sk.keyCode);
+  //   sk.print(key);
+  // }
+  // },
   components: {
     "vue-p5": VueP5
   },
   mounted(){
+    console.log(this.plant);
 
-    // fetch(`http://localhost:3000/specificplant/${this.plant['id']}`)
-    //   .then(results=>results.json())
-    //   .then(plantInfo => this.plantInformation = plantInfo)
+    fetch(`http://localhost:3000/specificplant/${this.plant['id']}`)
+      .then(results=>results.json())
+      .then(plantInfo => this.plantInformation = plantInfo)
 
   }
 }

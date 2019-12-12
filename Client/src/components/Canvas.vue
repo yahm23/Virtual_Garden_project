@@ -1,12 +1,12 @@
 <template >
   <div v-if='plants'>
-    <div v-for='plant in plants' :plant='plant' class="rowPlants">
-      <div class="specsPlant">
+    <div  class="rowPlants">
+      <div v-for='plant in plants' class="specsPlant">
           <p>{{plant['name']}}</p>
         <!-- <single-plant  :plant='plant'></single-plant> -->
       </div>
 
-      <p5 :plant='plant' >{{plant['name']}</p5>
+      <p5 v-for='(plant,id) in plants' :key='id' :plant='plant'></p5>
 
 
 
@@ -35,7 +35,7 @@ export default {
       }
     },
     mounted(){
-
+        // eventBus.$on('getPlants',()=>{})
         GardenServices.getPlants()
         .then(res => this.plants = res)
 

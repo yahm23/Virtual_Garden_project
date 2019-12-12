@@ -34,6 +34,7 @@ export default {
         .then(plantInfo => this.plantInformation = plantInfo)
         this.show = !this.show
     },
+
     newPlant(){
       const newPlant = {
         "name": this.plant.common_name,
@@ -54,13 +55,29 @@ export default {
     },
 
     getMinTemp(){
-      this.moreInfo()
+      fetch(`http://localhost:3000/specificplant/${this.plant['id']}`)
+        .then(results=>results.json())
+        .then(plantInfo => this.plantInformation = plantInfo)
+        
       let temp = 10
-      if(this.plantInformation['main_species']['growth']['temperature_minimum']['deg_c']!=undefined){
-        temp = this.plantInformation['main_species']['growth']['temperature_minimum']['deg_c']
-        return temp
+
+
+      if(this.plantInformation['main_species']){
+        console.log('');
+        if(this.plantInformation['main_species']['growth']){
+          if(this.plantInformation['main_species']['growth']['temperature_minimum']){
+            console.log(this.plantInformation['main_species']['growth']['temperature_minimum']);
+            if(this.plantInformation['main_species']['growth']['temperature_minimum']['deg_c']){
+              temp = this.plantInformation['main_species']['growth']['temperature_minimum']['deg_c']
+              return temp
+            }
+          }
+        }
       }
-      return temp
+      else{
+        console.log('hello');
+        return temp}
+
 
     },
 
